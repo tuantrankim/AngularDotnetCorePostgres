@@ -4,18 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AngularDotnetCore.Models
+namespace AngularDotnetCore.Dto
 {
-    public class Post
+    public class PostDto
     {
-        public int? Id { get; set; }
-        public ApplicationUser Owner { get; set; }
-        [Required]
-        public string OwnerId { get; set; }
-        [Required]
-        public DateTime? CreatedDate { get; set; }
-        [Required]
-        public DateTime? ModifiedDate { get; set; }
         [Required]
         [StringLength(2000)]
         public string Content { get; set; }

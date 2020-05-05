@@ -1,0 +1,52 @@
+
+<h2>Create a new post</h2>
+<form #f="ngForm" (ngSubmit)="submit(f)">
+
+  <label for="Content">Content</label>
+  <input type="text" name="Content" required minlength="10"
+         [(ngModel)]="newPost.Content"
+         #courseName="ngModel" class="form-control">
+  <!--<div class="alert alert-danger" *ngIf="Content.touched && !Content.valid">
+    <div *ngIf="Content.errors.required">Content is required</div>
+    <div *ngIf="Content.errors.minlength">
+      Content should be at least {{content.errors.minlength.requiredLength}}
+      characters
+    </div>
+  </div>-->
+
+  <label for="ContactEmail">Contact Email</label>
+  <input type="text" name="ContactEmail" required minlength="10"
+         [(ngModel)]="newPost.ContactEmail"
+         #courseName="ngModel" class="form-control">
+  <!--<div class="alert alert-danger" *ngIf="ContactEmail.touched && !ContactEmail.valid">
+    <div *ngIf="ContactEmail.errors.required">Content is required</div>
+    
+  </div>-->
+
+  <label for="ContactPhone">Contact Phone</label>
+  <input type="text" name="ContactPhone" required minlength="10"
+         [(ngModel)]="newPost.ContactPhone"
+         #courseName="ngModel" class="form-control">
+  <!--<div class="alert alert-danger" *ngIf="ContactPhone.touched && !ContactPhone.valid">
+    <div *ngIf="ContactPhone.errors.required">Content is required</div>
+  </div>-->
+  <!--<label for="category">Category</label>
+  <select name="category" [(ngModel)]="course.category" required #category="ngModel" class="form-control">
+    <option value=null></option>
+    <option *ngFor="let item of categories" [value]="item.id">{{item.name}}</option>
+  </select>
+  <div class="alert alert-danger" *ngIf="category.touched && !category.valid">
+    <div *ngIf="category.errors.required">Category is required</div>
+  </div>
+  <label for="isGuarantee_id">
+    <input type="checkbox" name="isGuarantee" id="isGuarantee_id"
+    [(ngModel)] = "course.isGuarantee"
+    > 30-day money-back guarantee?
+  </label>-->
+  <!-- [disabled]="!f.valid" -->
+  <p>{{f.value | json}}</p>
+  <button class="btn btn-primary" type="submit"
+          [disabled]="!f.valid">
+    Create Post
+  </button>
+</form>

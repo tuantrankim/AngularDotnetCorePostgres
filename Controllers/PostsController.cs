@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AngularDotnetCore.Data;
+using AngularDotnetCore.Dto;
 using AngularDotnetCore.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AngularDotnetCore.Controllers
@@ -16,9 +18,11 @@ namespace AngularDotnetCore.Controllers
     public class PostsController : ControllerBase
     {
         private ApplicationDbContext _context;
-        public PostsController(ApplicationDbContext context)
+        private UserManager<ApplicationUser> _userManager;
+        public PostsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: api/posts
@@ -58,11 +62,22 @@ namespace AngularDotnetCore.Controllers
         //model is come from body
         [Authorize]
         [HttpPost]
-        public IActionResult Post([FromBody] Post model)
+        public IActionResult Post([FromBody] PostDto dto)
         {
             try
             {
-                _context.Add(model);
+                var userId = _userManager.GetUserId(User);
+
+                Post model = new Post { 
+                    OwnerId = userId,
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    Content = dto.Content,
+                    ContactEmail = dto.ContactEmail,
+                    ContactPhone = dto.ContactPhone
+                };
+                _context.Posts.Add(model);
+                
                 if (_context.SaveChanges() > 0)
                 {
                     //instead of return 200: Ok, we return 201: Created 
