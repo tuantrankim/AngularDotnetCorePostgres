@@ -16,10 +16,20 @@ namespace AngularDotnetCore.Models
         public DateTime? CreatedDate { get; set; }
         [Required]
         public DateTime? ModifiedDate { get; set; }
+
+        [StringLength(255)]
+        public string Title { get; set; }
+
         [Required]
         [StringLength(2000)]
         public string Content { get; set; }
+        
+        public string City { get; set; }
+
+        [StringLength(10)]
+        public string PostalCode { get; set; }
         public string ContactEmail { get; set; }
         public string ContactPhone { get; set; }
+         
     }
 }

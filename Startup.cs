@@ -49,20 +49,30 @@ namespace AngularDotnetCore
 
             //SWAGGER
 
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new OpenApiInfo
-            //    {
-            //        Version = "v1",
-            //        Title = "My API",
-            //        Description = "My First ASP.NET Core Web API",                   
-            //    });
-            //});
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "My API",
+                    Description = "My First ASP.NET Core Web API",
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //ENABLE SWAGGER UI
+            
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = "swagger";
+            });
+
+            // END SWAGGER UI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -108,13 +118,7 @@ namespace AngularDotnetCore
                 }
             });
 
-            //ENABLE SWAGGER UI
-            //app.UseMvc();
-            //app.UseSwagger();
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            //});
+            
         }
     }
 }

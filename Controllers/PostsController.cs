@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AngularDotnetCore.Data;
 using AngularDotnetCore.Dto;
@@ -62,17 +63,21 @@ namespace AngularDotnetCore.Controllers
         //model is come from body
         [Authorize]
         [HttpPost]
-        public IActionResult Post([FromBody] PostDto dto)
+        public async Task<IActionResult> Post([FromBody] PostDto dto)
         {
             try
             {
-                var userId = _userManager.GetUserId(User);
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                //var user = _context.Users.Where(u => u.Id == userId).FirstOrDefault();
 
                 Post model = new Post { 
                     OwnerId = userId,
                     CreatedDate = DateTime.Now,
                     ModifiedDate = DateTime.Now,
+                    Title = dto.Title,
                     Content = dto.Content,
+                    City = dto.City,
+                    PostalCode = dto.PostalCode,
                     ContactEmail = dto.ContactEmail,
                     ContactPhone = dto.ContactPhone
                 };

@@ -2,6 +2,11 @@
 <h2>Create a new post</h2>
 <form #f="ngForm" (ngSubmit)="submit(f)">
 
+  <label for="Title">Title</label>
+  <input type="text" name="Title" required
+         [(ngModel)]="newPost.Title"
+         #courseName="ngModel" class="form-control">
+
   <label for="Content">Content</label>
   <input type="text" name="Content" required minlength="10"
          [(ngModel)]="newPost.Content"
@@ -14,22 +19,35 @@
     </div>
   </div>-->
 
-  <label for="ContactEmail">Contact Email</label>
-  <input type="text" name="ContactEmail" required minlength="10"
-         [(ngModel)]="newPost.ContactEmail"
-         #courseName="ngModel" class="form-control">
-  <!--<div class="alert alert-danger" *ngIf="ContactEmail.touched && !ContactEmail.valid">
-    <div *ngIf="ContactEmail.errors.required">Content is required</div>
-    
-  </div>-->
-
   <label for="ContactPhone">Contact Phone</label>
-  <input type="text" name="ContactPhone" required minlength="10"
+  <input type="text" name="ContactPhone" required
          [(ngModel)]="newPost.ContactPhone"
          #courseName="ngModel" class="form-control">
   <!--<div class="alert alert-danger" *ngIf="ContactPhone.touched && !ContactPhone.valid">
     <div *ngIf="ContactPhone.errors.required">Content is required</div>
   </div>-->
+
+
+  <label for="ContactEmail">Contact Email</label>
+  <input type="text" name="ContactEmail" required
+         [(ngModel)]="newPost.ContactEmail"
+         #courseName="ngModel" class="form-control">
+  <!--<div class="alert alert-danger" *ngIf="ContactEmail.touched && !ContactEmail.valid">
+    <div *ngIf="ContactEmail.errors.required">Content is required</div>
+
+  </div>-->
+
+
+  <label for="City">City</label>
+  <input type="text" name="City" required
+         [(ngModel)]="newPost.City"
+         #courseName="ngModel" class="form-control">
+
+  <label for="PostalCode">Postal Code</label>
+  <input type="text" name="PostalCode" required
+         [(ngModel)]="newPost.PostalCode"
+         #courseName="ngModel" class="form-control">
+
   <!--<label for="category">Category</label>
   <select name="category" [(ngModel)]="course.category" required #category="ngModel" class="form-control">
     <option value=null></option>
@@ -49,4 +67,6 @@
           [disabled]="!f.valid">
     Create Post
   </button>
+  <p *ngIf="errorMessage">{{errorMessage}}</p>
+  <p *ngIf="successMessage">{{successMessage}}</p>
 </form>
