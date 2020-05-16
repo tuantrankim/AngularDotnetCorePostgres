@@ -1,9 +1,9 @@
 <header>
   <nav
-    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
+    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom "
   >
     <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">AngularDotnetCore</a>
+
       <button
         class="navbar-toggler"
         type="button"
@@ -41,4 +41,28 @@
       </div>
     </div>
   </nav>
+  <div class="border-bottom box-shadow mb-3">
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-3">
+          <a class="navbar-brand" [routerLink]="['/']">
+            <img src="assets/images/raovatvietmy.png" alt="Rao Vặt Việt Mỹ" />
+          </a>
+        </div>
+
+        <div class="col-3 d-flex align-items-center">
+          <input type="search" class="form-control" placeholder="Tìm nội dung" />
+        </div>
+
+        <div class="col-3 d-flex align-items-center">
+          <input type="search" class="form-control" placeholder="Thành phố" />
+        </div>
+
+        <div class="col-3 d-flex align-items-center">
+          <button type="submit" class="btn btn-primary btn-create-post"> Đăng tin</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </header>

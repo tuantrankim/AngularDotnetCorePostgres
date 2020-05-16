@@ -14,3 +14,47 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+
+
+body {
+  font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+}
+
+.btn-create-post {
+  min-width: 150px;
+  font-size: 17px;
+}
+.page-title {
+    padding: 20px 0px;
+}
+.page-footer{
+    padding: 20px 0px;
+    margin: 40px 0px;
+}
+span.field-validation-error {
+  color: red;
+  font-weight: bold;
+}
+/* Bootstrap Overrides */
+.form-group {
+  margin-bottom: 20px;
+}
+.form-control {
+  font-size: 17px;
+  /*padding: 20px 15px;*/
+  border-radius: 9px;
+  -ms-border-radius: 9px;
+}
+
+.form-control:focus {
+  border-color: #2196f3;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.btn {
+  border-radius: 9px;
+  -ms-border-radius: 9px;
+}

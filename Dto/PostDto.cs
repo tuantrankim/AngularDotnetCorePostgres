@@ -9,7 +9,6 @@ namespace AngularDotnetCore.Dto
     public class PostDto
     {
         public string Title { get; set; }
-        [Required]
         [StringLength(2000)]
         public string Content { get; set; }
 

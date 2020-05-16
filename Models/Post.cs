@@ -20,7 +20,6 @@ namespace AngularDotnetCore.Models
         [StringLength(255)]
         public string Title { get; set; }
 
-        [Required]
         [StringLength(2000)]
         public string Content { get; set; }
         
