@@ -1,2 +1,30 @@
+﻿<style>
+  a {
+    color: black;
+  }
+  .card:hover {
+    background-color: lightgoldenrodyellow;
+  }
+  div {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+</style>
 
-{{posts | json}}
+<div class="container">
+  <div class="row">
+    <div class="col-4 p-1" *ngFor="let post of posts">
+      {{post | json}}
+      <a href="#" class="card-link" title="Click để xem chi tiết">
+        <div class="card" style="height: 12rem;">
+          <div class="card-body">
+            <p class="card-text" > {{ post.title }}</p>
+            <p class="card-text float-right"> [{{ post.createdDate | date }}] </p>
+
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+</div>

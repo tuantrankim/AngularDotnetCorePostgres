@@ -32,7 +32,7 @@ namespace AngularDotnetCore.Controllers
         {
             try
             {
-                var allPosts = _context.Posts.ToList();
+                var allPosts = _context.Posts.OrderByDescending(x=>x.CreatedDate).Take(100).ToList();
                 return Ok(allPosts);
             }
             catch (Exception ex)
