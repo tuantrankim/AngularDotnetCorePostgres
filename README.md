@@ -1,4 +1,16 @@
-﻿NugetPackage: uninstall EntityFrameworkCore.SQLServer -> install EntityFrameworkCore.PostgreSQL
+﻿### Icon
+https://www.iconfinder.com/icons/1222769/facebook_ads_facebook_marketing_marketing_icon
+
+### Favicon convert
+https://favicon.io/favicon-converter/
+
+### Support for ASP.NET Core Identity was added to your project.
+
+For setup and configuration information, see https://go.microsoft.com/fwlink/?linkid=2116645.
+
+## Setup
+
+NugetPackage: uninstall EntityFrameworkCore.SQLServer -> install EntityFrameworkCore.PostgreSQL
 Replace
 .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
 by
