@@ -1,15 +1,15 @@
 
 export class Post
 {
-  Id: number;
-  CreatedDate: Date;
-  ModifiedDate: Date;
+  id: number;
+  createdDate: Date;
+  modifiedDate: Date;
 
-  Title: string;
-  Content: string;
-  ContactEmail: string;
-  ContactPhone: string;
-  City: string;
-  PostalCode: string;
+  title: string;
+  content: string;
+  contactEmail: string;
+  contactPhone: string;
+  city: string;
+  postalCode: string;
 }
 

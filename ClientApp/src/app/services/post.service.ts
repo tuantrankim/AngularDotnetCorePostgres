@@ -3,6 +3,7 @@ import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
+import { Post } from '../models/Post';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +17,13 @@ export class PostService {
     else this.baseUrl = window.location.origin + '/api';
   }
 
-  get(action: string) {
-    return this.http.get(this.baseUrl + '/' + action)
+  getLatestPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(this.baseUrl + '/posts')
       .pipe(catchError(this.handleError));
   }
 
-  post(action: string, resource) {
-    return this.http.post(this.baseUrl + '/' + action, resource)
+  addNewPost(newPost: Post) {
+    return this.http.post(this.baseUrl + '/posts', newPost)
       .pipe(catchError(this.handleError));
   }
 

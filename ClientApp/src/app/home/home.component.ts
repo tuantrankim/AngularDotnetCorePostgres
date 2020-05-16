@@ -16,14 +16,14 @@ export class HomeComponent implements OnInit{
   ngOnInit() {
     this.getPosts();
   }
+
   getPosts() {
-    // console.log(request);
-    this.service.get("posts")
+    this.service.getLatestPosts()
       .subscribe(data => {
-        this.posts = data as Post[];
-        this.successMessage = JSON.stringify(data);
+        this.posts = data;
+        this.successMessage = `(${this.posts.length} items)`;
       }, error => {
-        this.errorMessage = JSON.stringify(error);
+          this.errorMessage = error;
       }
       );
   }
