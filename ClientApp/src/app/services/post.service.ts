@@ -14,16 +14,16 @@ export class PostService {
 
   constructor(private http: HttpClient) {
     if (environment.baseUrl) this.baseUrl = environment.baseUrl;
-    else this.baseUrl = window.location.origin + '/api';
+    else this.baseUrl = window.location.origin + '/api/posts/';
   }
 
   getLatestPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(this.baseUrl + '/posts')
+    return this.http.get<Post[]>(this.baseUrl + 'getLatest',)
       .pipe(catchError(this.handleError));
   }
 
   addNewPost(newPost: Post) {
-    return this.http.post(this.baseUrl + '/posts', newPost)
+    return this.http.post(this.baseUrl + 'addnew', newPost)
       .pipe(catchError(this.handleError));
   }
 

@@ -25,7 +25,7 @@ export class CreatePostComponent implements OnInit {
 
   createPost() {
     // console.log(request);
-    this.service.post("posts",this.newPost)
+    this.service.addNewPost(this.newPost)
     .subscribe(data => {
       this.successMessage = JSON.stringify(data);
     }, error => {

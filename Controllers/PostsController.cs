@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AngularDotnetCore.Controllers
 {
     
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class PostsController : ControllerBase
     {
@@ -26,9 +26,9 @@ namespace AngularDotnetCore.Controllers
             _userManager = userManager;
         }
 
-        // GET: api/posts
+        // GET: api/posts/getlatest
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetLatest()
         {
             try
             {
@@ -41,7 +41,39 @@ namespace AngularDotnetCore.Controllers
             }
         }
 
-        //GET: api/posts/id
+        [HttpPost]
+        // POST: api/posts/SearchLatest
+        public IActionResult SearchLatest([FromBody] PostSearchCriteriaDto dto)
+        {
+            try
+            {
+                IQueryable<Post> query = _context.Posts;
+                if (dto.FromPostId != null && dto.FromPostId > 0)
+                {
+                    query = query.Where(x => x.Id < dto.FromPostId);
+                }
+
+                if (!string.IsNullOrEmpty(dto.City))
+                {
+                    query = query.Where(x => x.City.ToUpper() == dto.City.ToUpper());
+                }
+
+                if (!string.IsNullOrEmpty(dto.TitleContain))
+                {
+                    query = query.Where(x => x.Title.ToUpper().Contains(dto.TitleContain.ToUpper()));
+                }
+                
+                var result = query.OrderByDescending(x => x.Id).Take(100).ToList();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Failed to get posts");
+            }
+        }
+
+        //GET: api/posts/get/id
         [HttpGet("{id:int}")]
         public IActionResult Get(int id)
         {
@@ -59,11 +91,13 @@ namespace AngularDotnetCore.Controllers
             }
         }
 
-        //POST: api/posts
+        
+
+        //POST: api/posts/addnew
         //model is come from body
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] PostDto dto)
+        public async Task<IActionResult> AddNew([FromBody] PostDto dto)
         {
             try
             {
