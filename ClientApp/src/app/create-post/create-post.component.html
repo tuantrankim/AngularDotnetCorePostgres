@@ -1,73 +1,81 @@
 
 <h2 class="page-title">Đăng Rao Vặt</h2>
 <p> <span class="field-validation-error">(*) </span> Cần điền / Indicate required field </p>
-<form #f="ngForm" (ngSubmit)="submit(f)">
+<form #f="ngForm" (ngSubmit)="submit(f);">
+  <input type="hidden" name="id" [(ngModel)]="newPost.id" />
   <div class="form-group">
-    <label for="Title"> <span class="field-validation-error">* </span>Nội Dung Tóm Lược / Summary</label>
-    <textarea type="text" name="Title" required rows="3" maxlength="200"
-              [(ngModel)]="newPost.Title"
-              #courseName="ngModel" class="form-control"></textarea>
-  </div>
-  <div class="form-group">
-    <label for="Content">Nội Dung Chi Tiết / Detail</label>
-    <textarea type="text" name="Content" rows="5"
-              [(ngModel)]="newPost.Content"
-              #courseName="ngModel" class="form-control"> </textarea>
-      
-  </div>
-
-  <div class="form-group">
-    <label for="ContactPhone">Điện Thoại Liên Lạc / Contact Phone</label>
-    <input type="text" name="ContactPhone" 
-           [(ngModel)]="newPost.ContactPhone"
-           #courseName="ngModel" class="form-control">
-    <!--<div class="alert alert-danger" *ngIf="ContactPhone.touched && !ContactPhone.valid">
-      <div *ngIf="ContactPhone.errors.required">Content is required</div>
-    </div>-->
-  </div>
-
-  <div class="form-group">
-    <label for="ContactEmail">Email Liên Lạc / Contact Email</label>
-    <input type="text" name="ContactEmail" 
-           [(ngModel)]="newPost.ContactEmail"
-           #courseName="ngModel" class="form-control">
-    <!--<div class="alert alert-danger" *ngIf="ContactEmail.touched && !ContactEmail.valid">
-      <div *ngIf="ContactEmail.errors.required">Content is required</div>
-
-    </div>-->
-  </div>
-
-  <div class="form-group">
-    <label for="City">Thành Phố / City</label>
-    <input type="text" name="City"
-           [(ngModel)]="newPost.City"
-           #courseName="ngModel" class="form-control">
-  </div>
-
-  <div class="form-group">
-    <label for="PostalCode">Mã Vùng / Postal Code</label>
-    <input type="text" name="PostalCode"
-           [(ngModel)]="newPost.PostalCode"
-           #courseName="ngModel" class="form-control">
+    <label for="title"> <span class="field-validation-error">* </span>Nội Dung Tóm Lược / Summary</label>
+    <textarea type="text" name="title" required rows="3" maxlength="200"
+              [(ngModel)]="newPost.title"
+              #title="ngModel" class="form-control"></textarea>
+    <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
+      <div *ngIf="title.errors.required">
+        Thông tin cần điền / Summary is required.
+      </div>
+      <div *ngIf="title.errors.maxlength">
+        Nội Dung Tóm Lược dài hơn {{title.errors.maxlength.requiredLength}} / Summary length must be less than {{title.errors.maxlength.requiredLength}}.
+      </div>
     </div>
-    <!--<label for="category">Category</label>
-    <select name="category" [(ngModel)]="course.category" required #category="ngModel" class="form-control">
-      <option value=null></option>
-      <option *ngFor="let item of categories" [value]="item.id">{{item.name}}</option>
-    </select>
-    <div class="alert alert-danger" *ngIf="category.touched && !category.valid">
-      <div *ngIf="category.errors.required">Category is required</div>
+  </div>
+  <div class="form-group">
+    <label for="content">Nội Dung Chi Tiết / Detail</label>
+    <textarea type="text" name="content" rows="5"
+              [(ngModel)]="newPost.content"
+              #content="ngModel" class="form-control"> </textarea>
+
+  </div>
+
+  <div class="form-group">
+    <label for="contactPhone">Điện Thoại Liên Lạc / Contact Phone</label>
+    <input type="text" name="contactPhone"
+           [(ngModel)]="newPost.contactPhone"
+           #contactPhone="ngModel" class="form-control" phone>
+  </div>
+
+  <div class="form-group">
+    <label for="contactEmail">Email Liên Lạc / Contact Email</label>
+    <input type="text" name="contactEmail"
+           [(ngModel)]="newPost.contactEmail"
+           #contactEmail="ngModel" class="form-control" email>
+    <div class="alert alert-danger" *ngIf="contactEmail.touched && contactEmail.invalid">
+      <div *ngIf="contactEmail.errors?.email">
+        Email không hợp thức / Invalid Email.
+      </div>
     </div>
-    <label for="isGuarantee_id">
-      <input type="checkbox" name="isGuarantee" id="isGuarantee_id"
-      [(ngModel)] = "course.isGuarantee"
-      > 30-day money-back guarantee?
-    </label>-->
-    <!-- [disabled]="!f.valid" -->
-    <p>{{f.value | json}}</p>
-    <button class="btn btn-primary btn-create-post" type="submit">
-      Đăng tin
-    </button>
-    <p *ngIf="errorMessage">{{errorMessage}}</p>
-    <p *ngIf="successMessage">{{successMessage}}</p>
+  </div>
+
+  <div class="form-group">
+    <label for="city">Thành Phố / City</label>
+    <input type="text" name="city"
+           [(ngModel)]="newPost.city"
+           #city="ngModel" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="postalCode">Mã Vùng / Postal Code</label>
+    <input type="text" name="postalCode"
+           [(ngModel)]="newPost.postalCode"
+           #postalCode="ngModel" class="form-control">
+  </div>
+  <!--<label for="category">Category</label>
+  <select name="category" [(ngModel)]="course.category" required #category="ngModel" class="form-control">
+    <option value=null></option>
+    <option *ngFor="let item of categories" [value]="item.id">{{item.name}}</option>
+  </select>
+  <div class="alert alert-danger" *ngIf="category.touched && !category.valid">
+    <div *ngIf="category.errors.required">Category is required</div>
+  </div>
+  <label for="isGuarantee_id">
+    <input type="checkbox" name="isGuarantee" id="isGuarantee_id"
+    [(ngModel)] = "course.isGuarantee"
+    > 30-day money-back guarantee?
+  </label>-->
+  <!-- [disabled]="!f.valid" -->
+  <button class="btn btn-primary btn-create-post" type="submit" [disabled]="!f.valid">
+    Đăng tin
+  </button>
+  
+  <div class="alert alert-danger mt-2" role="alert" *ngIf="errorMessage"><strong>{{errorMessage}}</strong></div>
+
+  <div class="alert alert-success mt-2" role="alert" *ngIf="successMessage "><strong>Tin đã được lưu / Post was saved successfully.</strong></div>
 </form>

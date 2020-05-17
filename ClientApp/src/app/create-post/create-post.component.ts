@@ -12,22 +12,25 @@ export class CreatePostComponent implements OnInit {
   public newPost: Post = new Post();
   public errorMessage;
   public successMessage;
+  private myForm;
+
   constructor(private service: PostService) { }
 
   ngOnInit() {
   }
 
   submit(f) {
-    console.log(this.newPost);
-    console.log(f);
-    this.createPost();
+    let p = { ...this.newPost };
+    this.myForm = f;
+    this.createPost(p);
   }
 
-  createPost() {
+  createPost(p) {
     // console.log(request);
-    this.service.addNewPost(this.newPost)
+    this.service.addNewPost(p)
     .subscribe(data => {
       this.successMessage = JSON.stringify(data);
+      this.myForm.resetForm();
     }, error => {
       this.errorMessage = JSON.stringify(error);
     }
