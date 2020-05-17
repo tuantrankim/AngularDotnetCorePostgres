@@ -23,7 +23,7 @@ export class PostService {
   }
 
   addNewPost(newPost: Post) {
-    return this.http.post(this.baseUrl + 'addnew', newPost)
+    return this.http.post<Post>(this.baseUrl + 'addnew', newPost)
       .pipe(catchError(this.handleError));
   }
 
