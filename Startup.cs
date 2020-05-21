@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.Net;
+using System.Linq;
 
 namespace AngularDotnetCore
 {
@@ -27,6 +29,18 @@ namespace AngularDotnetCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //ForwardHeaders setting
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.All;
+                //options.KnownProxies.Add(IPAddress.Parse("10.0.0.100"));
+                foreach (var proxy in Configuration.GetSection("KnownProxies").AsEnumerable()
+                .Where(c => c.Value != null))
+                {
+                    options.KnownProxies.Add(IPAddress.Parse(proxy.Value));
+                }
+            });
+            // End forward header setting
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -63,8 +77,10 @@ namespace AngularDotnetCore
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseForwardedHeaders();
+
             //ENABLE SWAGGER UI
-            
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

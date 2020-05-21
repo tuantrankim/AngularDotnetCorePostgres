@@ -60,4 +60,34 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 ```
 
-###quoc
+### Entity framework code first. Update database using Package Manager Console
+PM> update-database
+
+### Add migration
+PM> add-migration addNewColumn
+
+### Generate sql script from database
+```
+    # Powershell / Package manager console
+    Script-Migration
+
+    # Cli 
+    dotnet ef migrations script
+
+    upload to ec2 ~/postgres-script
+    ssh to ~/postgres-script
+    -login as posgres
+    psql posgres
+    -create database
+    CREATE DATABASE raovat;
+    - or drop database
+    DROP DATABASE raovat;
+    - exit
+    \q
+    - connect to database raovat
+    psql raovat
+    - Execute a sql script test.sql
+    \i ~\PATH\TO\test.sql
+
+
+```
