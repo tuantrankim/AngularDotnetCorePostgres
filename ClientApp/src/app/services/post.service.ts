@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { Post } from '../models/Post';
+import { PostSearchCriteria } from '../models/postSearchCriteria';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,16 @@ export class PostService {
 
   private baseUrl = '';
 
+  public searchCriteria: PostSearchCriteria;
+
   constructor(private http: HttpClient) {
     if (environment.baseUrl) this.baseUrl = environment.baseUrl;
     else this.baseUrl = window.location.origin + '/api/posts/';
+  }
+
+  searchLatest(postSearchCriteria: PostSearchCriteria): Observable<Post[]> {
+    return this.http.post<Post[]>(this.baseUrl + 'searchLatest', postSearchCriteria)
+      .pipe(catchError(this.handleError));
   }
 
   getLatestPosts(): Observable<Post[]> {

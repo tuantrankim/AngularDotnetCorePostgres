@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { PostSearchCriteria } from '../models/postSearchCriteria';
+import { PostService } from '../services/post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-menu',
@@ -7,6 +10,9 @@ import { Component } from '@angular/core';
 })
 export class NavMenuComponent {
   isExpanded = false;
+  public searchCriteria = new PostSearchCriteria();
+
+  constructor(private service: PostService, private router: Router) { }
 
   collapse() {
     this.isExpanded = false;
@@ -14,5 +20,13 @@ export class NavMenuComponent {
 
   toggle() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  searchPosts() {
+    this.service.searchCriteria = this.searchCriteria;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigateByUrl('/');
+    //window.location.href = "https://localhost:44385/";
   }
 }
