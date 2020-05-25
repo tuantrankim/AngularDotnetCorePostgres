@@ -16,7 +16,7 @@ export class PostService {
   private postUrl = '';
   private cityUrl = '';
 
-  public searchCriteria: PostSearchCriteria;
+  public searchCriteria: PostSearchCriteria = new PostSearchCriteria();
 
   constructor(private http: HttpClient) {
     if (environment.baseUrl) this.baseUrl = environment.baseUrl;

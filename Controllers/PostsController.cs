@@ -53,9 +53,9 @@ namespace AngularDotnetCore.Controllers
                     query = query.Where(x => x.Id < dto.FromPostId);
                 }
 
-                if (!string.IsNullOrEmpty(dto.City))
+                if (dto.CityId > 0)
                 {
-                    query = query.Where(x => x.City.ToUpper() == dto.City.ToUpper());
+                    query = query.Where(x => x.CityId == dto.CityId);
                 }
 
                 if (!string.IsNullOrEmpty(dto.TitleContain))
@@ -110,7 +110,8 @@ namespace AngularDotnetCore.Controllers
                     ModifiedDate = DateTime.Now,
                     Title = dto.Title,
                     Content = dto.Content,
-                    City = dto.City,
+                    CityId = dto.CityId,
+                    CategoryId = dto.CategoryId,
                     PostalCode = dto.PostalCode,
                     ContactEmail = dto.ContactEmail,
                     ContactPhone = dto.ContactPhone

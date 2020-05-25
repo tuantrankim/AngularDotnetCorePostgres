@@ -9,7 +9,8 @@ export class Post
   content: string;
   contactEmail: string;
   contactPhone: string;
-  city: string;
+  cityId: number;
+  categoryId: number;
   postalCode: string;
 }
 

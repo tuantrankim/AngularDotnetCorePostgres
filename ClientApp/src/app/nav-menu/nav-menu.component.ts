@@ -23,7 +23,7 @@ export class NavMenuComponent {
   }
 
   searchPosts() {
-    this.service.searchCriteria = this.searchCriteria;
+    this.service.searchCriteria.titleContain = this.searchCriteria.titleContain;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigateByUrl('/');

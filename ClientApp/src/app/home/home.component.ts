@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit{
 
   constructor(private service: PostService) { }
   ngOnInit() {
-    if (this.service.searchCriteria && (this.service.searchCriteria.titleContain || this.service.searchCriteria.city)) {
+    if (this.service.searchCriteria && (this.service.searchCriteria.titleContain || this.service.searchCriteria.cityId)) {
       this.searchPosts();
     }
     else this.getPosts();

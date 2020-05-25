@@ -1,0 +1,11 @@
+<div class="input-group">
+  <input id="typeahead-prevent-manual-entry" type="text" class="form-control"
+         placeholder="Thành phố. Vd: Foutain Valley, CA"
+         [(ngModel)]="model"
+         [ngbTypeahead]="search"
+         [inputFormatter]="formatter"
+         [resultFormatter]="formatter"
+         [editable]="false"
+         (click)="getCities()"
+         (selectItem)="selectedItem($event)" />
+</div>
