@@ -21,20 +21,43 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.4.1" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="Data\Migrations\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="Data\Migrations\**" />
+    <EmbeddedResource Remove="Data\Migrations\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="Data\Migrations\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Migrations\" />
+    <Compile Remove="Migrations\20200524023925_add_city_state.cs" />
+    <Compile Remove="Migrations\20200524023925_add_city_state.Designer.cs" />
+    <Compile Remove="Migrations\20200524024714_add_city_state.cs" />
+    <Compile Remove="Migrations\20200524024714_add_city_state.Designer.cs" />
+    <Compile Remove="Migrations\20200524175547_add_states_cities.cs" />
+    <Compile Remove="Migrations\20200524175547_add_states_cities.Designer.cs" />
+    <Compile Remove="Migrations\20200524180414_add_states_cities.cs" />
+    <Compile Remove="Migrations\20200524180414_add_states_cities.Designer.cs" />
+    <Compile Remove="Migrations\20200524180826_add_states_cities.cs" />
+    <Compile Remove="Migrations\20200524180826_add_states_cities.Designer.cs" />
+    <Compile Remove="Migrations\20200524190118_add_states_cities.cs" />
+    <Compile Remove="Migrations\20200524190118_add_states_cities.Designer.cs" />
+    <Compile Remove="Migrations\20200524190813_add_states_cities.cs" />
+    <Compile Remove="Migrations\20200524190813_add_states_cities.Designer.cs" />
+    <Compile Remove="Migrations\20200524190955_add_states_cities.cs" />
+    <Compile Remove="Migrations\20200524190955_add_states_cities.Designer.cs" />
+    <Compile Remove="Migrations\20200524205408_add_states_cities.cs" />
+    <Compile Remove="Migrations\20200524205408_add_states_cities.Designer.cs" />
+    <Compile Remove="Migrations\20200524205548_add_states_cities.cs" />
+    <Compile Remove="Migrations\20200524205548_add_states_cities.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

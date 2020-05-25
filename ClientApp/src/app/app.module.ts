@@ -13,6 +13,8 @@ import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { CreatePostComponent } from './create-post/create-post.component';
+import { NgbTypeaheadModule} from '@ng-bootstrap/ng-bootstrap';
+import { SearchCityComponent } from './search-city/search-city.component';
 
 @NgModule({
   declarations: [
@@ -21,13 +23,15 @@ import { CreatePostComponent } from './create-post/create-post.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    SearchCityComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     ApiAuthorizationModule,
+    NgbTypeaheadModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },

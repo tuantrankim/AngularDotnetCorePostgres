@@ -59,12 +59,20 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 
 ```
+### Add migration
+PM> add-migration addNewColumn
+
+### Remove last migration
+PM> remove-migration
 
 ### Entity framework code first. Update database using Package Manager Console
 PM> update-database
 
-### Add migration
-PM> add-migration addNewColumn
+### Rollback or update database to a migration
+PM> update-database 20200524180826_add_states_cities
+
+
+
 
 ### Generate sql script from database
 ```

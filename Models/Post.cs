@@ -8,6 +8,7 @@ namespace AngularDotnetCore.Models
 {
     public class Post
     {
+        //By default Id is set to be primary key and auto increase
         public int? Id { get; set; }
         public ApplicationUser Owner { get; set; }
         [Required]
