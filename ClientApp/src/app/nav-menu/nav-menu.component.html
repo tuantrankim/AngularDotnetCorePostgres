@@ -15,12 +15,21 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div
-        class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
-        [ngClass]="{ show: isExpanded }"
-      >
+      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
+           [ngClass]="{ show: isExpanded }">
         <app-login-menu></app-login-menu>
+        <!--<input type="search" class="form-control col-6" placeholder="Tìm nội dung" />-->
+
         <ul class="navbar-nav flex-grow">
+          <li class="nav-item">
+            <a [routerLink]="['/']">
+              <img class="logo" src="assets/images/raovatvietmy.png" alt="Rao Vặt Việt Mỹ" />
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <input type="search" class="form-control col-12" placeholder="Tìm nội dung" />
+          </li>
           <li class="nav-item"
               [routerLinkActive]="['link-active']"
               [routerLinkActiveOptions]="{ exact: true }">
@@ -28,14 +37,19 @@
           </li>
 
           <!--<li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/counter']">Counter</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/fetch-data']">Fetch data</a>
-          </li>-->
+    <a class="nav-link text-dark" [routerLink]="['/counter']">Counter</a>
+  </li>
+  <li class="nav-item" [routerLinkActive]="['link-active']">
+    <a class="nav-link text-dark" [routerLink]="['/fetch-data']">Fetch data</a>
+  </li>-->
 
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/create-post']">Đăng Tin</a>
+            <a class="nav-link text-dark" [routerLink]="['/create-post']">All Categories</a>
+          </li>
+
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <!--<a class="nav-link text-dark" [routerLink]="['/create-post']">Đăng Tin</a>-->
+            <button type="submit" class="btn btn-primary btn-create-post" [routerLink]="['/create-post']"> Đăng tin</button>
           </li>
         </ul>
       </div>
