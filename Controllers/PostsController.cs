@@ -48,12 +48,12 @@ namespace AngularDotnetCore.Controllers
             try
             {
                 IQueryable<Post> query = _context.Posts;
-                if (dto.FromPostId != null && dto.FromPostId > 0)
+                if ((dto.FromPostId??0) > 0)
                 {
                     query = query.Where(x => x.Id < dto.FromPostId);
                 }
 
-                if (dto.CityId > 0)
+                if ((dto.CityId?? 0) > 0)
                 {
                     query = query.Where(x => x.CityId == dto.CityId);
                 }
@@ -117,8 +117,9 @@ namespace AngularDotnetCore.Controllers
                     ContactPhone = dto.ContactPhone
                 };
                 _context.Posts.Add(model);
-                
-                if (_context.SaveChanges() > 0)
+
+                var result = await _context.SaveChangesAsync(); 
+                if ( result > 0)
                 {
                     //instead of return 200: Ok, we return 201: Created 
                     return Created($"/api/posts/{model.Id}", model);

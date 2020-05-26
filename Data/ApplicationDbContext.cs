@@ -17,7 +17,8 @@ namespace AngularDotnetCore.Data
         public DbSet<City> Cities { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<Post> Posts { get; set; }
-
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<CategoryGroup> CategoryGroups {get; set;}
         public ApplicationDbContext(
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
@@ -52,8 +53,78 @@ namespace AngularDotnetCore.Data
             builder.Entity<State>().HasData(states);
             builder.Entity<City>().HasData(cities);
         }
+        void LoadCategoryGroupsWithCategories(ref ModelBuilder builder)
+        {
+            builder.Entity<CategoryGroup>().HasData(new CategoryGroup { Id = 1, Name = "Thuê (Share) & Cho Thuê" });
+            builder.Entity<CategoryGroup>().HasData(new CategoryGroup { Id = 2, Name = "Mua Bán" });
+            builder.Entity<CategoryGroup>().HasData(new CategoryGroup { Id = 3, Name = "Việc Làm (Jobs)" });
+            builder.Entity<CategoryGroup>().HasData(new CategoryGroup { Id = 4, Name = "Real Estate, Sang Nhượng Tiệm & Financing" });
+            builder.Entity<CategoryGroup>().HasData(new CategoryGroup { Id = 5, Name = "Dịch Vụ (Services)" });
+            builder.Entity<CategoryGroup>().HasData(new CategoryGroup { Id = 6, Name = "Linh Tinh (Misc)" });
+
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 1, Id = 1, Name = "Share Phòng" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 1, Id = 2, Name = "Cần & Cho Thuê Nhà, Chung Cư, Apt. Condo" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 1, Id = 3, Name = "Cần & Cho Thuê Văn Phòng, Cửa Tiệm" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 1, Id = 4, Name = "Cần & Cho Thuê Các Thứ Khác" });
+
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 2, Id = 5, Name = "Nail & Beauty Spa Supply" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 2, Id = 6, Name = "Mua Bán Xe / Car" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 2, Id = 7, Name = "Mua Bán Sĩ, Xuất Nhập Khẩu" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 2, Id = 8, Name = "Mua Bán Các Loại" });
+            
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 9, Name = "Cần Thợ Nails & Tóc" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 10, Name = "Cần Chăm Sóc Trẻ Em, Người Già" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 11, Name = "Nhận Giữ Trẻ Em Và Chăm Sóc Người Già" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 12, Name = "Giúp Việc Nhà / Domestic Assistance" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 13, Name = "Việc Hãng Xưởng / Manufacturing Job" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 14, Name = "Việc Văn Phòng / Office - Clerical Jobs" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 15, Name = "Việc Chợ / Nhà Hàng - Restaurant/Supermarket" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 16, Name = "Việc Thợ may / Sewing Jobs" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 17, Name = "Các việc khác (General Jobs)" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 18, Name = "Người Tìm Việc / Looking for Job" });
+
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 4, Id = 19, Name = "Mua Bán Tiệm Nail & Tóc / Salon Office Transfer" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 4, Id = 20, Name = "Mua Bán Cơ Sở Thương Mại / Business Office" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 4, Id = 21, Name = "Mua Bán Nhà / Real Estate" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 4, Id = 22, Name = "Vay Mượn & Đầu Tư / Loan - Financing" });
+
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 23, Name = "Kế Toán, Luật Pháp, Tư Vấn / Accounting - Laws Service" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 24, Name = "Xây Cất / Construction" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 25, Name = "Sửa Điện, Ống Nước / Electric, Plumbing" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 26, Name = "Sửa Máy Móc Gia Dụng / Appliances Repair" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 27, Name = "Sửa Xe / Car (Auto) Repair" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 28, Name = "Làm Vườn / Landscaping" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 29, Name = "Máy Tính, Phần Mềm, Web / IT" });
+
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 30, Name = "Dạy Kèm / Tutoring" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 31, Name = "Đưa Đón / Pickup" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 32, Name = "Du Lịch, Du Học / Travel, Study" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 33, Name = "Đấm Bóp & Thư Giãn / Massage" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 34, Name = "Cơm Tháng / Meal Delivery" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 35, Name = "Dọn Nhà, Chuyển Văn Phòng / Moving" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 36, Name = "Giặt Thảm, Vệ Sinh / Cleaning" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 37, Name = "Bảng Hiệu / Banner" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 38, Name = "Nhắn Tin, Thông Báo / Announcement" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 39, Name = "Các Dịch Vụ Khác / Other Services" });
+
+
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 6, Id = 40, Name = "Lời Nguyện Tôn Giáo / Religious Prayers" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 6, Id = 41, Name = "Tìm Người Thân / Friends and Family Search" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 6, Id = 42, Name = "Tìm Bạn Bốn Phương / Connecting People" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 6, Id = 43, Name = "Đồ Miễn Phí / Free Stuffs" });
+
+        }
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Category>(entity => {
+                entity.HasOne(c => c.CategoryGroup)
+                       .WithMany(g => g.Categories)
+                       .HasForeignKey("CategoryGroupId");
+
+            });
+
+            LoadCategoryGroupsWithCategories(ref builder);
+
             builder.Entity<City>(entity =>
             {
                 entity.HasOne(c => c.State)

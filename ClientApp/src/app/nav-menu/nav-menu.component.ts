@@ -3,6 +3,7 @@ import { PostSearchCriteria } from '../models/postSearchCriteria';
 import { PostService } from '../services/post.service';
 import { Router } from '@angular/router';
 import { City } from '../models/City';
+import { Category } from '../models/Category';
 
 @Component({
   selector: 'app-nav-menu',
@@ -33,5 +34,9 @@ export class NavMenuComponent {
   onCityChange(city: City) {
     console.log("on city changed");
     console.log(city);
+  }
+  onCategoryChange(category: Category) {
+    console.log("on category changed");
+    console.log(category);
   }
 }

@@ -117,5 +117,5 @@ export class SearchCityComponent implements OnInit {
   }
 
   showPopOver = () => { return !this.model || !this.model.id };
-  tooltipContent = (term) => term? term + " không tồn tại": "Tìm trên tất cả thành phố"
+  tooltipContent = (term) => term ? term + " không tồn tại. Bộ lọc được xóa" : "Bộ lọc được xóa";
 }

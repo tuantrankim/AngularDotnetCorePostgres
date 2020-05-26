@@ -25,8 +25,8 @@ namespace AngularDotnetCore.Models
         public string Content { get; set; }
         
         public string City { get; set; }
-        public int CityId { get; set; }
-        public int CategoryId { get; set; }
+        public int? CityId { get; set; }
+        public int? CategoryId { get; set; }
 
         [StringLength(10)]
         public string PostalCode { get; set; }

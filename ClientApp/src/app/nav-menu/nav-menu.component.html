@@ -59,11 +59,11 @@
     
     <div class="container">
       <div class="row">
-        <div class="col-3">
+        <!--<div class="col-3">
           <a class="navbar-brand" [routerLink]="['/']">
             <img src="assets/images/raovatvietmy.png" alt="Rao Vặt Việt Mỹ" />
           </a>
-        </div>
+        </div>-->
 
         <div class="col-4 d-flex align-items-center">
           <form class="form-inline my-2 my-lg-0" #searchForm="ngForm" (ngSubmit)="searchPosts();">
@@ -74,18 +74,17 @@
                      #titleContain="ngModel"
                      class="form-control">
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm</button>
-              </div>
+            </div>
           </form>
         </div>
        
-        <div class="col-2 d-flex align-items-center">
-          <input type="search" class="form-control" placeholder="Thành phố" />
-        </div>
-        <app-search-city [globalSearch]="true" (cityChange)="onCityChange($event)"></app-search-city>
-        <div class="col-3 d-flex align-items-center">
-          <button type="submit" class="btn btn-primary btn-create-post"> Đăng tin</button>
-        </div>
       </div>
+
+      <div class="row">
+        <app-search-city class="col-5" [globalSearch]="true" (cityChange)="onCityChange($event)"></app-search-city>
+        <app-search-category class="col-5" [globalSearch]="true" (cityChange)="onCategoryChange($event)"></app-search-category>
+      </div>
+
     </div>
   </div>
 </header>

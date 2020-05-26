@@ -1,0 +1,27 @@
+<form>
+  <div class="input-group">
+    <input name="search" type="text" class="form-control"
+           placeholder="Chọn Thư Mục Vd: Cần Thợ Nail"
+           [(ngModel)]="model"
+           [ngbTypeahead]="search"
+           [inputFormatter]="inputFormatter"
+           [resultFormatter]="resultFormatter"
+           [editable]="false"
+           (selectItem)="selectedItem($event)"
+           (focus)="focus$.next($any($event).target.value)"
+           (click)="click$.next($any($event).target.value)"
+           #instance="ngbTypeahead"
+           #term [ngbTooltip]="tooltipContent(term.value)"
+           tooltipClass="btn btn-alert"
+           triggers="manual" #t1="ngbTooltip" />
+
+    <span class="input-group-append">
+      <button class="input-group-text bg-transparent" (click)="searchBtnClick(t1)" type="submit">
+        <i class="material-icons">search</i>
+      </button>
+    </span>
+
+  </div>
+</form>
+
+<pre>Model: {{ model | json }}</pre>

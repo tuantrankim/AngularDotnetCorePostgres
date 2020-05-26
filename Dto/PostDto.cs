@@ -12,8 +12,8 @@ namespace AngularDotnetCore.Dto
         [StringLength(2000)]
         public string Content { get; set; }
 
-        public int CityId { get; set; }
-        public int CategoryId { get; set; }
+        public int? CityId { get; set; }
+        public int? CategoryId { get; set; }
 
         [StringLength(10)]
         public string PostalCode { get; set; }

@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { Post } from '../models/Post';
 import { PostSearchCriteria } from '../models/postSearchCriteria';
 import { City } from '../models/City';
+import { Category } from '../models/Category';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class PostService {
   private baseUrl = '';
   private postUrl = '';
   private cityUrl = '';
+  private categoryUrl = '';
 
   public searchCriteria: PostSearchCriteria = new PostSearchCriteria();
 
@@ -24,6 +26,7 @@ export class PostService {
 
     this.postUrl = this.baseUrl + 'posts/';
     this.cityUrl = this.baseUrl + 'cities/';
+    this.categoryUrl = this.baseUrl + 'categories/';
 
   }
 
@@ -47,6 +50,34 @@ export class PostService {
       .pipe(catchError(this.handleError));
   }
 
+  getAllCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.categoryUrl + 'all')
+      .pipe(catchError(this.handleError));
+  }
+
+  removeAccents(str) {
+    var AccentsMap = [
+      "aàảãáạăằẳẵắặâầẩẫấậ",
+      "AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬ",
+      "dđ", "DĐ",
+      "eèẻẽéẹêềểễếệ",
+      "EÈẺẼÉẸÊỀỂỄẾỆ",
+      "iìỉĩíị",
+      "IÌỈĨÍỊ",
+      "oòỏõóọôồổỗốộơờởỡớợ",
+      "OÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢ",
+      "uùủũúụưừửữứự",
+      "UÙỦŨÚỤƯỪỬỮỨỰ",
+      "yỳỷỹýỵ",
+      "YỲỶỸÝỴ"
+    ];
+    for (var i = 0; i < AccentsMap.length; i++) {
+      var re = new RegExp('[' + AccentsMap[i].substr(1) + ']', 'g');
+      var char = AccentsMap[i][0];
+      str = str.replace(re, char);
+    }
+  return str;
+}
   /////////////////////////////////////////////////////////
   update(action: string, resource) {
     return this.http.patch(this.postUrl + '/' + action + '/' + resource.id, { isRead: true })

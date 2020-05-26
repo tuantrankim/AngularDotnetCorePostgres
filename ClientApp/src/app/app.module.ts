@@ -15,6 +15,7 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
 import { CreatePostComponent } from './create-post/create-post.component';
 import { NgbTypeaheadModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 import { SearchCityComponent } from './search-city/search-city.component';
+import { SearchCategoryComponent } from './search-category/search-category.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SearchCityComponent } from './search-city/search-city.component';
     CounterComponent,
     FetchDataComponent,
     CreatePostComponent,
-    SearchCityComponent
+    SearchCityComponent,
+    SearchCategoryComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
