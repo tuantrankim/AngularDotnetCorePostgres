@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../services/post.service';
 import { Post } from '../models/Post';
+import { City } from '../models/City';
 
 @Component({
   selector: 'app-create-post',
@@ -24,7 +25,9 @@ export class CreatePostComponent implements OnInit {
     this.myForm = f;
     this.createPost(p);
   }
-
+  onCityChange(city: City) {
+    this.newPost.cityId = city ? city.id : null;
+  }
   createPost(p) {
     // console.log(request);
     this.service.addNewPost(p)

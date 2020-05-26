@@ -1,11 +1,27 @@
-<div class="input-group">
-  <input id="typeahead-prevent-manual-entry" type="text" class="form-control"
-         placeholder="Thành phố. Vd: Foutain Valley, CA"
-         [(ngModel)]="model"
-         [ngbTypeahead]="search"
-         [inputFormatter]="formatter"
-         [resultFormatter]="formatter"
-         [editable]="false"
-         (click)="getCities()"
-         (selectItem)="selectedItem($event)" />
-</div>
+<form>
+  <div class="input-group">
+    <input name="search" id="typeahead-prevent-manual-entry" type="text" class="form-control"
+           placeholder="Thành phố. Vd: Foutain Valley, CA"
+           [(ngModel)]="model"
+           [ngbTypeahead]="search"
+           [inputFormatter]="inputFormatter"
+           [resultFormatter]="resultFormatter"
+           [editable]="false"
+           (selectItem)="selectedItem($event)"
+           (focus)="focus$.next($any($event).target.value)"
+           (click)="click$.next($any($event).target.value)"
+           #instance="ngbTypeahead"
+           #term [ngbTooltip]="tooltipContent(term.value)"
+           tooltipClass="btn btn-alert"
+           triggers="manual" #t1="ngbTooltip" />
+
+    <span class="input-group-append">
+      <button class="input-group-text bg-transparent" (click)="searchBtnClick(t1)" type="submit">
+        <i class="material-icons">search</i>
+      </button>
+    </span>
+
+  </div>
+</form>
+
+<pre>Model: {{ model | json }}</pre>

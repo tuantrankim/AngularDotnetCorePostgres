@@ -44,11 +44,15 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <!--<div class="form-group">
     <label for="cityId">Thành Phố / City</label>
     <input type="number" name="cityId"
            [(ngModel)]="newPost.cityId"
            #cityId="ngModel" class="form-control">
+  </div>-->
+  <div class="form-group">
+    <label for="cityId">Thành Phố / City</label>
+    <app-search-city [globalSearch]="true" (cityChange)="onCityChange($event)"></app-search-city>
   </div>
 
   <div class="form-group">

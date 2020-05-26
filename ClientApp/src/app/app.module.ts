@@ -13,7 +13,7 @@ import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { CreatePostComponent } from './create-post/create-post.component';
-import { NgbTypeaheadModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbTypeaheadModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 import { SearchCityComponent } from './search-city/search-city.component';
 
 @NgModule({
@@ -32,6 +32,7 @@ import { SearchCityComponent } from './search-city/search-city.component';
     FormsModule,
     ApiAuthorizationModule,
     NgbTypeaheadModule,
+    NgbTooltipModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },

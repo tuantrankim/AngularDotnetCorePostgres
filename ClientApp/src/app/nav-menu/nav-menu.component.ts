@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PostSearchCriteria } from '../models/postSearchCriteria';
 import { PostService } from '../services/post.service';
 import { Router } from '@angular/router';
+import { City } from '../models/City';
 
 @Component({
   selector: 'app-nav-menu',
@@ -28,5 +29,9 @@ export class NavMenuComponent {
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigateByUrl('/');
     //window.location.href = "https://localhost:44385/";
+  }
+  onCityChange(city: City) {
+    console.log("on city changed");
+    console.log(city);
   }
 }
