@@ -2,14 +2,22 @@
   a {
     color: black;
   }
+
   .card:hover {
     background-color: lightgoldenrodyellow;
   }
+
   div {
     text-align: justify;
     text-justify: inter-word;
   }
 </style>
+
+
+<app-banner></app-banner>
+<app-ad-card></app-ad-card>
+
+
 
 <div class="container">
   <div class="row">
@@ -17,7 +25,7 @@
       <a href="#" class="card-link" title="Click để xem chi tiết">
         <div class="card" style="height: 12rem;">
           <div class="card-body">
-            <p class="card-text" > {{ post.title }}</p>
+            <p class="card-text"> {{ post.title }}</p>
             <p class="card-text float-right"> [{{ post.createdDate | date }}] </p>
           </div>
         </div>

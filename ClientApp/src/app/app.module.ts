@@ -1,3 +1,4 @@
+import { AdCardService } from './services/ad-card.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -16,6 +17,9 @@ import { CreatePostComponent } from './create-post/create-post.component';
 import { NgbTypeaheadModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 import { SearchCityComponent } from './search-city/search-city.component';
 import { SearchCategoryComponent } from './search-category/search-category.component';
+import { AdCardComponent } from './ad-card/ad-card.component';
+import { BannerComponent } from './banner/banner.component';
+import { SearchContentComponent } from './search-content/search-content.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,9 @@ import { SearchCategoryComponent } from './search-category/search-category.compo
     CreatePostComponent,
     SearchCityComponent,
     SearchCategoryComponent
+    AdCardComponent,
+    BannerComponent,
+    SearchContentComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -43,7 +50,8 @@ import { SearchCategoryComponent } from './search-category/search-category.compo
     ])
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
+    AdCardService
   ],
   bootstrap: [AppComponent]
 })

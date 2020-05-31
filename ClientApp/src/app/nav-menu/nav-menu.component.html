@@ -15,6 +15,8 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
+
+
       <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
            [ngClass]="{ show: isExpanded }">
         <app-login-menu></app-login-menu>
@@ -27,34 +29,54 @@
             </a>
           </li>
 
+          <!--Search city input-->
           <li class="nav-item">
-            <input type="search" class="form-control col-12" placeholder="Tìm nội dung" />
+            <app-search-city></app-search-city>
           </li>
-          <li class="nav-item"
+
+          <!--Search content input-->
+          <li class="nav-item">
+            <app-search-content></app-search-content>
+          </li>
+
+          <!--Home button-->
+          <!--<li class="nav-item"
               [routerLinkActive]="['link-active']"
-              [routerLinkActiveOptions]="{ exact: true }">
-            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
-          </li>
-
-          <!--<li class="nav-item" [routerLinkActive]="['link-active']">
-    <a class="nav-link text-dark" [routerLink]="['/counter']">Counter</a>
-  </li>
-  <li class="nav-item" [routerLinkActive]="['link-active']">
-    <a class="nav-link text-dark" [routerLink]="['/fetch-data']">Fetch data</a>
-  </li>-->
+              [routerLinkActiveOptions]="{ exact: true }">-->
 
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/create-post']">All Categories</a>
+            <a class="nav-link text-dark" [routerLink]="['/']">
+              <span class="material-icons"> home </span>
+            </a>
           </li>
 
+
+          <!--All categories button-->
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <!--<a class="nav-link text-dark" [routerLink]="['/create-post']">Đăng Tin</a>-->
-            <button type="submit" class="btn btn-primary btn-create-post" [routerLink]="['/create-post']"> Đăng tin</button>
+            <a class="nav-link text-dark" [routerLink]="['/create-post']">
+              <span class="material-icons"> category </span>
+            </a>
           </li>
+
+
+
+
+         
         </ul>
       </div>
     </div>
   </nav>
+
+
+
+
+
+
+
+
+
+
+
   <div class="border-bottom box-shadow mb-3">
     
     <div class="container">
