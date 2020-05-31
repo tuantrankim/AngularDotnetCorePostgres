@@ -30,7 +30,7 @@ import { SearchContentComponent } from './search-content/search-content.componen
     FetchDataComponent,
     CreatePostComponent,
     SearchCityComponent,
-    SearchCategoryComponent
+    SearchCategoryComponent,
     AdCardComponent,
     BannerComponent,
     SearchContentComponent
