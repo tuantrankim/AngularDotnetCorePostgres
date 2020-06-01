@@ -1,0 +1,43 @@
+
+
+  <div class="card-container d-flex flex-wrap ">
+    <div class="card" *ngFor="let post of posts">
+      <!--<a href="#" class="card-link" title="Click để xem chi tiết">-->
+      <div class="card-header">
+        <div class="row">
+          <span class="material-icons text-left">
+            apartment
+          </span>
+          <div class="col-10 text-center">
+            <!--{{ cities | filter : {'id':post.cityId} }}-->
+            {{post.city}}
+          </div>
+          <span class="material-icons  text-right">
+            share
+          </span>
+        </div>
+      </div>
+      <!--End card header-->
+      <!--<img class="card-img-top" src="{{card['img']}}" alt="Card image cap">-->
+
+      <div class="card-body">
+        <p class="card-text"> {{ post.title }} </p>
+        <p class="card-text float-right"> [{{ post.createdDate | date }}] </p>
+      </div>
+
+      <!--<div style="height: 200px; width: 200px">
+        <div class="card-body">
+          <p class="card-text"> {{ post.title }}</p>
+          <p class="card-text float-right"> [{{ post.createdDate | date }}] </p>
+        </div>
+      </div>-->
+      <!--</a>-->
+    </div>
+
+  </div>
+
+<div class="text-center">
+  <button class="btn btn-default" (click)="loadMore()"><<< Xem thêm >>></button>
+</div>
+<p class="float-right small">{{successMessage}}</p>
+<!--{{errorMessage}}-->

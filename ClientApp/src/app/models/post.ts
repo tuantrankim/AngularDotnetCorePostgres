@@ -10,7 +10,9 @@ export class Post
   contactEmail: string;
   contactPhone: string;
   cityId: number;
+  city: string;
   categoryId: number;
+  category: string;
   postalCode: string;
 }
 

@@ -58,3 +58,23 @@ span.field-validation-error {
   border-radius: 9px;
   -ms-border-radius: 9px;
 }
+
+.card {
+  width: 350px;
+  margin: 10px;
+}
+
+.card:hover {
+  background-color: lightgoldenrodyellow;
+}
+
+
+
+.center-div {
+  margin: 0 auto;
+}
+
+.card-header {
+  padding: .25rem 1.25rem;
+  color: grey;
+}

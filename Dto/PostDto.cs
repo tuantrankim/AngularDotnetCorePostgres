@@ -13,11 +13,16 @@ namespace AngularDotnetCore.Dto
         public string Content { get; set; }
 
         public int? CityId { get; set; }
+        public string City { get; set; }
         public int? CategoryId { get; set; }
+        public string Category { get; set; }
 
         [StringLength(10)]
         public string PostalCode { get; set; }
         public string ContactEmail { get; set; }
         public string ContactPhone { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+
     }
 }

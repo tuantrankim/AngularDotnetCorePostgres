@@ -23,7 +23,7 @@
         <!--<input type="search" class="form-control col-6" placeholder="Tìm nội dung" />-->
 
         <ul class="navbar-nav flex-grow">
-          <li class="nav-item">
+          <li class="nav-item ">
             <a [routerLink]="['/']">
               <img class="logo" src="assets/images/raovatvietmy.png" alt="Rao Vặt Việt Mỹ" />
             </a>
@@ -31,20 +31,22 @@
 
           <!--Search city input-->
           <li class="nav-item">
-            <form #searchForm="ngForm" (ngSubmit)="searchPosts();">
-              <div class="input-group">
-                <input type="search" name="titleContain"
-                       [(ngModel)]="searchContent"
-                       placeholder="Tìm nội dung"
-                       class="form-control">
-  
-                <span class="input-group-append">
-                  <button class="input-group-text bg-transparent" type="submit">
-                    <i class="material-icons">search</i>
-                  </button>
-                </span>
-              </div>
-            </form>
+            <div style="min-width:200px">
+              <form #searchForm="ngForm" (ngSubmit)="searchPosts();">
+                <div class="input-group">
+                  <input type="search" name="titleContain"
+                         [(ngModel)]="searchContent"
+                         placeholder="Tìm nội dung"
+                         class="form-control">
+
+                  <span class="input-group-append">
+                    <button class="input-group-text bg-transparent" type="submit">
+                      <i class="material-icons">search</i>
+                    </button>
+                  </span>
+                </div>
+              </form>
+            </div>
           </li>
          
 

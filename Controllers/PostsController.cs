@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AngularDotnetCore.Controllers
 {
@@ -32,7 +33,27 @@ namespace AngularDotnetCore.Controllers
         {
             try
             {
-                var allPosts = _context.Posts.OrderByDescending(x=>x.CreatedDate).Take(30).ToList();
+                var allPosts = _context.Posts
+                    .Include(p => p.City)
+                    .ThenInclude(c => c.State)
+                    .OrderByDescending(x=>x.CreatedDate)
+                    .Select(p => new PostDto()
+                    {
+                        Title = p.Title,
+                        Content = "",
+
+                        CityId = p.CityId,
+                        City = p.City.Name + ", " + p.City.State.Abbreviation,
+                        CategoryId = p.CategoryId,
+                        Category = p.Category.Name,
+
+                        PostalCode = p.PostalCode,
+                        ContactEmail = p.ContactEmail,
+                        ContactPhone = p.ContactPhone,
+                        CreatedDate = p.CreatedDate,
+                        ModifiedDate = p.ModifiedDate
+                    })
+                    .Take(30).ToList();
                 return Ok(allPosts);
             }
             catch (Exception ex)
@@ -47,7 +68,10 @@ namespace AngularDotnetCore.Controllers
         {
             try
             {
-                IQueryable<Post> query = _context.Posts;
+                IQueryable<Post> query = _context.Posts
+                    .Include(p=>p.City)
+                    .ThenInclude(c => c.State);
+
                 if ((dto.FromPostId??0) > 0)
                 {
                     query = query.Where(x => x.Id < dto.FromPostId);
@@ -63,7 +87,25 @@ namespace AngularDotnetCore.Controllers
                     query = query.Where(x => x.Title.ToUpper().Contains(dto.TitleContain.ToUpper()));
                 }
                 
-                var result = query.OrderByDescending(x => x.Id).Take(30).ToList();
+                var result = query
+                    .OrderByDescending(x => x.Id)
+                    .Select(p => new PostDto()
+                    {
+                        Title = p.Title,
+                        Content = "",
+
+                        CityId = p.CityId,
+                        City = p.City.Name + ", " + p.City.State.Abbreviation,
+                        CategoryId = p.CategoryId,
+                        Category = p.Category.Name,
+
+                        PostalCode = p.PostalCode,
+                        ContactEmail = p.ContactEmail,
+                        ContactPhone = p.ContactPhone,
+                        CreatedDate = p.CreatedDate,
+                        ModifiedDate = p.ModifiedDate
+                    })
+                    .Take(30).ToList();
 
                 return Ok(result);
             }

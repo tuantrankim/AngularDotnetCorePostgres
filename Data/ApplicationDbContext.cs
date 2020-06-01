@@ -116,6 +116,7 @@ namespace AngularDotnetCore.Data
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            
             builder.Entity<Category>(entity => {
                 entity.HasOne(c => c.CategoryGroup)
                        .WithMany(g => g.Categories)
