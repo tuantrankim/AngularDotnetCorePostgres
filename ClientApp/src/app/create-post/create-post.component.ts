@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from '../services/post.service';
 import { Post } from '../models/Post';
 import { City } from '../models/City';
+import { Category } from '../models/Category';
 
 @Component({
   selector: 'app-create-post',
@@ -25,6 +26,11 @@ export class CreatePostComponent implements OnInit {
     this.myForm = f;
     this.createPost(p);
   }
+
+  onCategoryChange(category: Category) {
+    this.newPost.categoryId = category ? category.id : null;
+  }
+
   onCityChange(city: City) {
     this.newPost.cityId = city ? city.id : null;
   }

@@ -20,12 +20,14 @@ import { SearchCategoryComponent } from './search-category/search-category.compo
 import { AdCardComponent } from './ad-card/ad-card.component';
 import { BannerComponent } from './banner/banner.component';
 import { SearchContentComponent } from './search-content/search-content.component';
+import { PostListComponent } from './post-list/post-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
+    PostListComponent,
     CounterComponent,
     FetchDataComponent,
     CreatePostComponent,
@@ -44,6 +46,7 @@ import { SearchContentComponent } from './search-content/search-content.componen
     NgbTooltipModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'search/:fromPostId/:cityId/:categoryId/:titleContain', component: PostListComponent },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
       { path: 'create-post', component: CreatePostComponent, canActivate: [AuthorizeGuard] },

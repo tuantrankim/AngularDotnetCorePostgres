@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, BehaviorSubject, of } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
@@ -17,9 +17,16 @@ export class PostService {
   private postUrl = '';
   private cityUrl = '';
   private categoryUrl = '';
+  private notify = new BehaviorSubject<any>(null);
+  public notifyObservable$ = this.notify.asObservable();
+  //private searchCriteria: PostSearchCriteria;
 
-  public searchCriteria: PostSearchCriteria = new PostSearchCriteria();
+  private _searchFromPostId: number;
+  private _searchTitleContain: string;
+  private _searchCityId: number;
+  private _searchCategoryId: number;
 
+  private _cities: City[];
   constructor(private http: HttpClient) {
     if (environment.baseUrl) this.baseUrl = environment.baseUrl;
     else this.baseUrl = window.location.origin + '/api/';
@@ -28,6 +35,128 @@ export class PostService {
     this.cityUrl = this.baseUrl + 'cities/';
     this.categoryUrl = this.baseUrl + 'categories/';
 
+  }
+
+  public get searchFromPostId()
+  {
+    if (!this._searchFromPostId) {
+      this._searchFromPostId = JSON.parse(localStorage.getItem("searchFromPostId"));
+    }
+    return this._searchFromPostId;
+  }
+
+  public set searchFromPostId(value: number) {
+    if (value !== this._searchFromPostId) {
+      this._searchFromPostId = value;
+      localStorage.setItem("searchFromPostId", JSON.stringify(value));
+      this.notify.next(this.searchCriteria);
+    }
+  }
+
+  public get searchCityId() {
+    if (!this._searchCityId) {
+      this._searchCityId = JSON.parse(localStorage.getItem("searchCityId"));
+    }
+    return this._searchCityId;
+  }
+
+  public set searchCityId(value: number) {
+    if (value !== this._searchCityId) {
+      this._searchCityId = value;
+      localStorage.setItem("searchCityId", JSON.stringify(value));
+      this.notify.next(this.searchCriteria);
+    }
+  }
+
+  public get searchCategoryId() {
+    if (!this._searchCategoryId) {
+      this._searchCategoryId = JSON.parse(localStorage.getItem("searchCategoryId"));
+    }
+    return this._searchCategoryId;
+  }
+
+  public set searchCategoryId(value: number) {
+    if (value !== this._searchCategoryId) {
+      this._searchCategoryId = value;
+      localStorage.setItem("searchCategoryId", JSON.stringify(value));
+      this.notify.next(this.searchCriteria);
+    }
+  }
+
+  public get searchTitleContain() {
+    if (!this._searchTitleContain) {
+      this._searchTitleContain = JSON.parse(localStorage.getItem("searchTitleContain"));
+    }
+    return this._searchTitleContain;
+  }
+
+  public set searchTitleContain(value: string) {
+    if (value !== this._searchTitleContain) {
+      this._searchTitleContain = value;
+      localStorage.setItem("searchTitleContain", JSON.stringify(value));
+      this.notify.next(this.searchCriteria);
+    }
+  }
+
+  //public get searchContent()
+  //{
+  //  return this.searchCriteria.titleContain;
+  //}
+  //public set searchContent(content: string)
+  //{
+  //  if(this.searchContent !== content)    
+  //  {
+  //    this._searchCriteria.titleContain = content;
+  //    localStorage["SearchCriteria"] = JSON.stringify(this._searchCriteria);
+  //    this.notify.next(this._searchCriteria);
+  //  }
+  //}
+
+  //public get searchCityId()
+  //{
+  //  return this.searchCriteria.cityId;
+  //}
+  //public set searchCityId(cityId: number)
+  //{
+  //  if(this.searchCityId !== cityId)    
+  //  {
+  //    this._searchCriteria.cityId = cityId;
+  //    localStorage["SearchCriteria"] = JSON.stringify(this._searchCriteria);
+  //    this.notify.next(this._searchCriteria);
+  //  }
+  //}
+
+  //public get searchCategoryId()
+  //{
+  //  return this.searchCriteria?.categoryId;
+  //}
+  //public set searchCategoryId(categoryId: number)
+  //{
+  //  if(this.searchCategoryId !== categoryId)    
+  //  {
+  //    this._searchCriteria.categoryId = categoryId;
+  //    localStorage["SearchCriteria"] = JSON.stringify(this._searchCriteria);
+  //    this.notify.next(this._searchCriteria);
+  //  }
+  //}
+
+  //public set searchCriteria(criteria: PostSearchCriteria) {
+  //  if (!criteria) localStorage.removeItem("SearchCriteria");
+
+  //  if(JSON.stringify(this._searchCriteria) !== JSON.stringify(criteria)) {
+  //    this._searchCriteria = {...criteria};
+  //    localStorage["SearchCriteria"] = JSON.stringify(this._searchCriteria);
+  //    this.notify.next(criteria);
+  //  }
+  //}
+
+  public get searchCriteria(): PostSearchCriteria{
+    return {
+      fromPostId :  this._searchFromPostId,
+      titleContain : this._searchTitleContain,
+      cityId : this._searchCityId,
+      categoryId : this._searchCategoryId
+    }
   }
 
   searchLatest(postSearchCriteria: PostSearchCriteria): Observable<Post[]> {
@@ -44,10 +173,32 @@ export class PostService {
     return this.http.post<Post>(this.postUrl + 'addnew', newPost)
       .pipe(catchError(this.handleError));
   }
+  setAllCities(value: City[]) {
+    if (value !== this._cities) {
+      this._cities = value;
+      localStorage.setItem("cities", JSON.stringify(value));
+    }
+  }
 
   getAllCities(): Observable<City[]> {
-    return this.http.get<City[]>(this.cityUrl + 'all')
-      .pipe(catchError(this.handleError));
+    if (!this._cities) {
+      let items: City[];
+      try {
+        items = JSON.parse(localStorage.getItem("cities"));
+      }
+      catch
+      {
+        localStorage.removeItem("cities");
+      }
+
+      if (!items || items.length == 0) {
+        return this.http.get<City[]>(this.cityUrl + 'all')
+          .pipe(catchError(this.handleError));
+      }
+      else this._cities = items;
+    }
+
+    return of(this._cities);
   }
 
   getAllCategories(): Observable<Category[]> {

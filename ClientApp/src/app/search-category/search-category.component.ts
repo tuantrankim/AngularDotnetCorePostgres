@@ -89,8 +89,8 @@ export class SearchCategoryComponent implements OnInit {
 
     this.service.getAllCategories()
       .subscribe(data => {
-        this.categories = data;
-        //this.cities.unshift({ id:0 , name:"---Tất cả---"});
+        this.categories = [...data];
+        this.categories.unshift({ id: null, name: "---  Tất cả  ---", categoryGroupId: null, categoryGroupName: null });
         this.successMessage = `(${this.categories.length} items)`;
       }, error => {
         this.errorMessage = error;
@@ -99,17 +99,25 @@ export class SearchCategoryComponent implements OnInit {
   }
 
   selectedItem(item) {
-    if (this.globalSearch) this.service.searchCriteria.categoryId = item.item.id;
+    //if (this.globalSearch) this.service.searchCriteria.categoryId = item.item.id;
     console.log("Search item selected");
     this.categoryChange.emit(item.item);
   }
 
   searchBtnClick(tooltip) {
-    if (!this.model || !this.model.id) {
+    if (!this.model) {
       this.model = null;
-      this.service.searchCriteria.categoryId = null;
+      //this.service.searchCriteria.categoryId = null;
       tooltip.open();
       
+    }
+    
+    else {
+      if (!this.model.id) {
+        this.model = null;
+      }
+
+      tooltip.close();
     }
     console.log("Search button click");
     this.categoryChange.emit(this.model);

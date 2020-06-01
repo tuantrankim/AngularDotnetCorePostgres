@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { PostSearchCriteria } from '../models/postSearchCriteria';
 import { PostService } from '../services/post.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { City } from '../models/City';
 import { Category } from '../models/Category';
 
@@ -12,9 +12,9 @@ import { Category } from '../models/Category';
 })
 export class NavMenuComponent {
   isExpanded = false;
-  public searchCriteria = new PostSearchCriteria();
-
-  constructor(private service: PostService, private router: Router) { }
+  //public searchCriteria = new PostSearchCriteria();
+  public searchContent = "";
+  constructor(private service: PostService, private router: Router, private route: ActivatedRoute) { }
 
   collapse() {
     this.isExpanded = false;
@@ -25,18 +25,29 @@ export class NavMenuComponent {
   }
 
   searchPosts() {
-    this.service.searchCriteria.titleContain = this.searchCriteria.titleContain;
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigateByUrl('/');
-    //window.location.href = "https://localhost:44385/";
+    console.log("on search content");
+    this.service.searchTitleContain = this.searchContent;
   }
+  //searchPosts2() {
+  //  this.service.searchCriteria.titleContain = this.searchContent;
+  //  this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  //  this.router.onSameUrlNavigation = 'reload';
+  //  this.router.navigateByUrl('/');
+  //  //window.location.href = "https://localhost:44385/";
+  //}
   onCityChange(city: City) {
     console.log("on city changed");
     console.log(city);
+
+    this.service.searchCityId = city? city.id : null;
+    //this.router.navigate(['/search'], { queryParams: { city: city.id } });
+    //this.router.navigate(['cityId', city.id], { relativeTo: this.route });
+    //this.router.navigate(['/search', city.id]);
   }
   onCategoryChange(category: Category) {
+    this.service.searchCategoryId = category? category.id: null;
     console.log("on category changed");
     console.log(category);
+    //this.router.navigate(['/search'], { queryParams: { category: category.id } });
   }
 }

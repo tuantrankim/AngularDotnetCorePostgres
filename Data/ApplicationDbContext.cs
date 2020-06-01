@@ -62,7 +62,7 @@ namespace AngularDotnetCore.Data
             builder.Entity<CategoryGroup>().HasData(new CategoryGroup { Id = 5, Name = "Dịch Vụ (Services)" });
             builder.Entity<CategoryGroup>().HasData(new CategoryGroup { Id = 6, Name = "Linh Tinh (Misc)" });
 
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 1, Id = 1, Name = "Share Phòng" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 1, Id = 1, Name = "Thuê (Share) Phòng" });
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 1, Id = 2, Name = "Cần & Cho Thuê Nhà, Chung Cư, Apt. Condo" });
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 1, Id = 3, Name = "Cần & Cho Thuê Văn Phòng, Cửa Tiệm" });
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 1, Id = 4, Name = "Cần & Cho Thuê Các Thứ Khác" });

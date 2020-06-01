@@ -1,9 +1,9 @@
 import { City } from "./City";
 
-export class PostSearchCriteria
+export interface PostSearchCriteria
 {
   fromPostId: number;
-  public titleContain: string;
+  titleContain: string;
   cityId: number;
   categoryId: number;
 }

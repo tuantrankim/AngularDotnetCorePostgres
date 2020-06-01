@@ -89,9 +89,10 @@ export class SearchCityComponent implements OnInit {
 
     this.service.getAllCities()
       .subscribe(data => {
-        this.cities = data;
-        //this.cities.unshift({ id:0 , name:"---Tất cả---"});
+        this.cities = [...data];
         this.successMessage = `(${this.cities.length} items)`;
+        this.service.setAllCities(data);
+        this.cities.unshift({ id: null, name: "---  Tất cả  ---" });
       }, error => {
         this.errorMessage = error;
       }
@@ -99,19 +100,25 @@ export class SearchCityComponent implements OnInit {
   }
 
   selectedItem(item) {
-    if (this.globalSearch) this.service.searchCriteria.cityId = item.item.id;
+    //if (this.globalSearch) this.service.searchCriteria.cityId = item.item.id;
     console.log("Search item selected");
     this.cityChange.emit(item.item);
   }
 
   searchBtnClick(tooltip) {
-    if (!this.model || !this.model.id) {
+    if (!this.model) {
       this.model = null;
-      this.service.searchCriteria.cityId = null;
+      //this.service.searchCriteria.cityId = null;
       tooltip.open();
-      
+
     }
-    console.log("Search button click");
+    else {
+      if (!this.model.id) {
+        this.model = null;
+      }
+      tooltip.close();
+    }
+      console.log("Search button click");
     this.cityChange.emit(this.model);
     
   }

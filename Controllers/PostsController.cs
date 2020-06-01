@@ -32,7 +32,7 @@ namespace AngularDotnetCore.Controllers
         {
             try
             {
-                var allPosts = _context.Posts.OrderByDescending(x=>x.CreatedDate).Take(100).ToList();
+                var allPosts = _context.Posts.OrderByDescending(x=>x.CreatedDate).Take(30).ToList();
                 return Ok(allPosts);
             }
             catch (Exception ex)
@@ -63,7 +63,7 @@ namespace AngularDotnetCore.Controllers
                     query = query.Where(x => x.Title.ToUpper().Contains(dto.TitleContain.ToUpper()));
                 }
                 
-                var result = query.OrderByDescending(x => x.Id).Take(100).ToList();
+                var result = query.OrderByDescending(x => x.Id).Take(30).ToList();
 
                 return Ok(result);
             }
