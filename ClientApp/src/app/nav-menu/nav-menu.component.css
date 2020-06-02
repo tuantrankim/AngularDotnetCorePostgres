@@ -1,8 +1,23 @@
-a.navbar-brand {
+/*.navbar-brand {
+  float: left;
+  height: 50px;
+  padding: 15px 15px;
+  font-size: 18px;
+  line-height: 20px;
+}*/
+
+/*.navbar-fixed-top, .navbar-fixed-bottom {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}*/
+
+  /*a .navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
-}
+}*/
 
 html {
   font-size: 14px;
@@ -24,4 +39,19 @@ html {
 .logo {
     height: 6vh;
     margin-left: 0;
+}
+
+
+#top-link-block.affix-show {
+  display:block;
+  position: fixed;
+  bottom: 30px;
+  right: 5px;
+  background-color: transparent;
+  z-index: 1000;
+  color: dodgerblue;
+}
+
+#top-link-block.affix-hide {
+  display:none;
 }

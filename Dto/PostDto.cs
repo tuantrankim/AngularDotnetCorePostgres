@@ -8,16 +8,14 @@ namespace AngularDotnetCore.Dto
 {
     public class PostDto
     {
+        public int? Id { get; set; }
+        public string OwnerId { get; set; }
         public string Title { get; set; }
-        [StringLength(2000)]
         public string Content { get; set; }
-
         public int? CityId { get; set; }
         public string City { get; set; }
         public int? CategoryId { get; set; }
         public string Category { get; set; }
-
-        [StringLength(10)]
         public string PostalCode { get; set; }
         public string ContactEmail { get; set; }
         public string ContactPhone { get; set; }

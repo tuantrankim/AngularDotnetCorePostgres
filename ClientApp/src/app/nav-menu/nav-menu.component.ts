@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PostSearchCriteria } from '../models/postSearchCriteria';
 import { PostService } from '../services/post.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -10,11 +10,22 @@ import { Category } from '../models/Category';
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })
-export class NavMenuComponent {
+export class NavMenuComponent implements OnInit{
+    ngOnInit(): void {
+      window.addEventListener('scroll', this.scrolling, true);
+    }
   isExpanded = false;
   //public searchCriteria = new PostSearchCriteria();
   public searchContent = "";
+  public showTopIcon = false;
   constructor(private service: PostService, private router: Router, private route: ActivatedRoute) { }
+
+  scrolling = (s) => {
+    let sc = s.target.scrollingElement.scrollTop;
+    console.log();
+    if (sc >= 500) { this.showTopIcon = true }
+    else { this.showTopIcon = false }
+  }
 
   collapse() {
     this.isExpanded = false;

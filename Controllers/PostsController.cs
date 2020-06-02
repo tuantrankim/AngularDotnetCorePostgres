@@ -39,6 +39,7 @@ namespace AngularDotnetCore.Controllers
                     .OrderByDescending(x=>x.CreatedDate)
                     .Select(p => new PostDto()
                     {
+                        Id = p.Id,
                         Title = p.Title,
                         Content = "",
 
@@ -91,6 +92,7 @@ namespace AngularDotnetCore.Controllers
                     .OrderByDescending(x => x.Id)
                     .Select(p => new PostDto()
                     {
+                        Id = p.Id,
                         Title = p.Title,
                         Content = "",
 
