@@ -17,9 +17,16 @@
 
 <ul class="navbar-nav" *ngIf="!(isAuthenticated | async)">
   <li class="nav-item">
-        <a class="nav-link text-dark" [routerLink]='["/authentication/register"]'>Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" [routerLink]='["/authentication/login"]'>Login</a>
-    </li>
+    <a class="nav-link text-dark" [routerLink]='["/authentication/login"]'>
+      <span>
+        <i class="material-icons align-top">account_circle</i>
+        Đăng nhập
+      </span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-dark" [routerLink]='["/authentication/register"]'>
+      <i class="material-icons align-top">perm_identity</i>
+    Đăng ký</a>
+  </li>
 </ul>
