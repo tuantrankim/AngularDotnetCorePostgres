@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace AngularDotnetCore.Controllers
 {
@@ -21,8 +22,10 @@ namespace AngularDotnetCore.Controllers
     {
         private ApplicationDbContext _context;
         private UserManager<ApplicationUser> _userManager;
-        public PostsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        private readonly ILogger<PostsController> _logger;
+        public PostsController(ILogger<PostsController> logger, ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
+            _logger = logger;
             _context = context;
             _userManager = userManager;
         }
@@ -59,6 +62,8 @@ namespace AngularDotnetCore.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.ToString());
+                _logger.LogTrace(ex, ex.Message);
                 return BadRequest("Failed to get posts");
             }
         }
@@ -113,6 +118,8 @@ namespace AngularDotnetCore.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.ToString());
+                _logger.LogTrace(ex, ex.Message);
                 return BadRequest("Failed to get posts");
             }
         }
@@ -131,6 +138,8 @@ namespace AngularDotnetCore.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.ToString());
+                _logger.LogTrace(ex, ex.Message);
                 return BadRequest("Failed to get a post");
             }
         }
@@ -171,6 +180,8 @@ namespace AngularDotnetCore.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.ToString());
+                _logger.LogTrace(ex, ex.Message);
                 //_logger.LogError($"Failed to save new user: {ex}");
             }
 

@@ -7,6 +7,7 @@ using AngularDotnetCore.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace AngularDotnetCore.Controllers
 {
@@ -15,8 +16,10 @@ namespace AngularDotnetCore.Controllers
     public class CitiesController : ControllerBase
     {
         private ApplicationDbContext _context;
-        public CitiesController(ApplicationDbContext context)
+        private readonly ILogger<CitiesController> _logger;
+        public CitiesController(ILogger<CitiesController> logger, ApplicationDbContext context)
         {
+            _logger = logger;
             _context = context;
         }
 
@@ -36,6 +39,8 @@ namespace AngularDotnetCore.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.ToString());
+                _logger.LogTrace(ex, ex.Message);
                 return BadRequest("Failed to get cities");
             }
         }

@@ -7,6 +7,7 @@ using AngularDotnetCore.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace AngularDotnetCore.Controllers
 {
@@ -14,9 +15,11 @@ namespace AngularDotnetCore.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
+        private readonly ILogger<CategoriesController> _logger;
         private ApplicationDbContext _context;
-        public CategoriesController(ApplicationDbContext context)
+        public CategoriesController(ILogger<CategoriesController> logger, ApplicationDbContext context)
         {
+            _logger = logger;
             _context = context;
         }
 
@@ -36,6 +39,8 @@ namespace AngularDotnetCore.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.ToString());
+                _logger.LogTrace(ex, ex.Message);
                 return BadRequest("Failed to get Categories");
             }
         }

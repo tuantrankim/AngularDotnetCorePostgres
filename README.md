@@ -99,3 +99,6 @@ PM> update-database 20200524180826_add_states_cities
 
 
 ```
+
+### from startup file uncomment to run in https
+//app.UseHttpsRedirection();

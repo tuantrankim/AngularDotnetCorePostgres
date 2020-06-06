@@ -30,7 +30,7 @@ namespace AngularDotnetCore.Data
             List<State> states = new List<State>();
             List<City> cities = new List<City>();
 
-            var myJsonString = File.ReadAllText(@"Data\states.json");
+            var myJsonString = File.ReadAllText(Path.Combine("Data","states.json"));
             var myJObject = JObject.Parse(myJsonString);
 
             int stateId = 0;
