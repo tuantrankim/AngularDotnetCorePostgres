@@ -14,6 +14,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Net;
 using System.Linq;
+using AngularDotnetCore.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace AngularDotnetCore
 {
@@ -44,8 +46,20 @@ namespace AngularDotnetCore
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("DefaultConnection")));
+            
+            services.AddTransient<IEmailSender, EmailSender>();
 
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<ApplicationUser>(options => {
+                //easy password
+                options.Password.RequiredLength = 4;
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+
+                options.SignIn.RequireConfirmedAccount = true;
+                //options.SignIn.RequireConfirmedEmail = true;
+                }
+            )
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddIdentityServer()
