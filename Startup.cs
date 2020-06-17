@@ -64,9 +64,34 @@ namespace AngularDotnetCore
 
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+            var googleClient = Configuration.GetSection("Google");
+            string googleClientId = googleClient.GetValue<string>("ClientId");
+            string googleClientSecret = googleClient.GetValue<string>("ClientSecret");
 
-            services.AddAuthentication()
+            var facebookClient = Configuration.GetSection("Facebook");
+            string facebookClientId = facebookClient.GetValue<string>("ClientId");
+            string facebookClientSecret = facebookClient.GetValue<string>("ClientSecret");
+
+            var authen = services.AddAuthentication()
                 .AddIdentityServerJwt();
+            if (googleClient != null && !string.IsNullOrEmpty(googleClientId) && !string.IsNullOrEmpty(googleClientSecret))
+            {
+                authen = authen.AddGoogle(options =>
+                {
+                    options.ClientId = googleClientId;
+                    options.ClientSecret = googleClientSecret;
+                });
+            }
+
+            if (facebookClient != null && !string.IsNullOrEmpty(facebookClientId) && string.IsNullOrEmpty(facebookClientSecret))
+            {
+                authen = authen.AddFacebook(options =>
+                {
+                    options.AppId = facebookClientId;
+                    options.AppSecret = facebookClientSecret;
+                });
+            }
+
             services.AddControllersWithViews();
             services.AddRazorPages();
             // In production, the Angular files will be served from this directory

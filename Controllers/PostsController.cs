@@ -88,6 +88,11 @@ namespace AngularDotnetCore.Controllers
                     query = query.Where(x => x.CityId == dto.CityId);
                 }
 
+                if ((dto.CategoryId ?? 0) > 0)
+                {
+                    query = query.Where(x => x.CategoryId == dto.CategoryId);
+                }
+
                 if (!string.IsNullOrEmpty(dto.TitleContain))
                 {
                     query = query.Where(x => x.Title.ToUpper().Contains(dto.TitleContain.ToUpper()));

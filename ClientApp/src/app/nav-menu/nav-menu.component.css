@@ -19,12 +19,7 @@
   word-break: break-all;
 }*/
 
-  .nav-search{
-      width: 350px;
-      min-width:100px;
-      margin: 10px 10px;
-      
-  }
+
 html {
   font-size: 14px;
 }
@@ -61,3 +56,5 @@ html {
 #top-link-block.affix-hide {
   display:none;
 }
+
+

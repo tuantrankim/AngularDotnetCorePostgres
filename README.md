@@ -1,4 +1,18 @@
-﻿### Icon
+﻿List
+-https
+-facebook login
+-UI logo-nav and card items -mobile and laptop
+-performance
+-search and filter
+-login style and email in vietnamese
+
+-views and like(saved)
+-file upload
+-details
+-my posts
+
+
+### Icon
 https://www.iconfinder.com/icons/1222769/facebook_ads_facebook_marketing_marketing_icon
 
 ### Favicon convert
@@ -102,3 +116,13 @@ PM> update-database 20200524180826_add_states_cities
 
 ### from startup file uncomment to run in https
 //app.UseHttpsRedirection();
+
+### Google authentication setting up
+https://console.developers.google.com/apis/credentials?project=raovatvietmy
+https://www.youtube.com/watch?v=fgzRnlB992s
+https://www.youtube.com/watch?v=vkB2yaV7_LQ
+https://www.youtube.com/watch?v=V4KqpIX6pdI
+Nuget need Microsoft.AspNetCore.Authentication.Google
+
+### Facebook authentication setting
+https://developers.facebook.com/apps/594568731175431/fb-login/settings/

@@ -23,7 +23,7 @@ export class NavMenuComponent implements OnInit{
   scrolling = (s) => {
     let sc = s.target.scrollingElement.scrollTop;
     console.log();
-    if (sc >= 500) { this.showTopIcon = true }
+    if (sc >= 100) { this.showTopIcon = true }
     else { this.showTopIcon = false }
   }
 
@@ -46,15 +46,14 @@ export class NavMenuComponent implements OnInit{
   //  this.router.navigateByUrl('/');
   //  //window.location.href = "https://localhost:44385/";
   //}
+
   onCityChange(city: City) {
     console.log("on city changed");
     console.log(city);
-
     this.service.searchCityId = city? city.id : null;
-    //this.router.navigate(['/search'], { queryParams: { city: city.id } });
-    //this.router.navigate(['cityId', city.id], { relativeTo: this.route });
-    //this.router.navigate(['/search', city.id]);
+
   }
+
   onCategoryChange(category: Category) {
     this.service.searchCategoryId = category? category.id: null;
     console.log("on category changed");

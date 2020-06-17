@@ -83,3 +83,33 @@ span.field-validation-error {
   padding: .25rem 1.25rem;
   color: grey;
 }
+
+input[type=search]::-webkit-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
+}
+
+input[type=search] {
+  -webkit-appearance: none;
+}
+
+.nav-search {
+  width: 350px;
+  min-width: 100px;
+  margin: 10px 10px;
+}
+
+.nav-search label {
+  color: #0069d9;
+  font-size: small;
+  font-weight: bold;
+  margin: 0px 10px;
+}
+
+  .nav-search .form-group {
+      margin-top:0px;
+      margin-bottom:0px;
+  }
+
+  .offset-navbar{
+      margin-top:70px;
+  }

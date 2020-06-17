@@ -104,6 +104,22 @@ export class SearchCityComponent implements OnInit {
     console.log("Search item selected");
     this.cityChange.emit(item.item);
   }
+  onSearch(tooltip) {
+    if (!this.model) {
+      this.model = null;
+      //this.service.searchCriteria.cityId = null;
+      tooltip.open();
+
+    }
+    else {
+      if (!this.model.id) {
+        this.model = null;
+      }
+      tooltip.close();
+    }
+    console.log("Search button click");
+    this.cityChange.emit(this.model);
+  }
 
   searchBtnClick(tooltip) {
     if (!this.model) {

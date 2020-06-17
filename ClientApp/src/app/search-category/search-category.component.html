@@ -1,7 +1,8 @@
 <form>
-  <div class="input-group">
-    <input name="search" type="text" class="form-control"
-           placeholder="Chọn Thư Mục Vd: Cần Thợ Nail"
+  <div class="form-group">
+    <label for="searchCategory">Lọc theo phân loại</label>
+    <input id="searchCategory" name="searchCategory" type="search" class="form-control"
+           placeholder="Vd: share phòng"
            [(ngModel)]="model"
            [ngbTypeahead]="search"
            [inputFormatter]="inputFormatter"
@@ -13,13 +14,15 @@
            #instance="ngbTypeahead"
            #term [ngbTooltip]="tooltipContent(term.value)"
            tooltipClass="btn btn-alert"
-           triggers="manual" #t1="ngbTooltip" />
+           triggers="manual" #t1="ngbTooltip"
+           (search) ="onSearch(t1)"
+           />
 
-    <span class="input-group-append">
+    <!--<span class="input-group-append">
       <button class="input-group-text bg-transparent" (click)="searchBtnClick(t1)" type="submit">
         <i class="material-icons">search</i>
       </button>
-    </span>
+    </span>-->
 
   </div>
 </form>

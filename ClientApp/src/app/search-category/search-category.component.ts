@@ -104,6 +104,25 @@ export class SearchCategoryComponent implements OnInit {
     this.categoryChange.emit(item.item);
   }
 
+  onSearch(tooltip) {
+    if (!this.model) {
+      this.model = null;
+      //this.service.searchCriteria.categoryId = null;
+      tooltip.open();
+
+    }
+
+    else {
+      if (!this.model.id) {
+        this.model = null;
+      }
+
+      tooltip.close();
+    }
+    console.log("Search button click");
+    this.categoryChange.emit(this.model);
+  }
+
   searchBtnClick(tooltip) {
     if (!this.model) {
       this.model = null;
