@@ -4,13 +4,14 @@
 -UI logo-nav and card items -mobile and laptop
 -performance
 -search and filter
+-search unicode with/without vietnamese sign.
 -login style and email in vietnamese
 
 -views and like(saved)
 -file upload
 -details
 -my posts
-
+-webcrawler: done
 
 ### Icon
 https://www.iconfinder.com/icons/1222769/facebook_ads_facebook_marketing_marketing_icon
@@ -126,3 +127,11 @@ Nuget need Microsoft.AspNetCore.Authentication.Google
 
 ### Facebook authentication setting
 https://developers.facebook.com/apps/594568731175431/fb-login/settings/
+
+### Add background service into project
+
+https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-3.1&tabs=visual-studio
+
+example
+
+https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/hosted-services/samples/3.x/BackgroundTasksSample

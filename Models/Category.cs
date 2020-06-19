@@ -14,5 +14,7 @@ namespace AngularDotnetCore.Models
 
         public int? CategoryGroupId { get; set; }
         public CategoryGroup CategoryGroup { get; set; }
+        [StringLength(2000)]
+        public string ExternalUrl { get; set; }
     }
 }

@@ -14,17 +14,24 @@ namespace AngularDotnetCore.Data
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
+        public DbSet<EventLog> EventLogs { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Category> Categories { get; set; }
+
         public DbSet<CategoryGroup> CategoryGroups {get; set;}
         public ApplicationDbContext(
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
-
+        [DbFunction("CodeFirstDatabaseSchema", "unaccent")]
+        public string Unaccent(string value)
+        {
+            // no need to provide an implementation
+            throw new NotSupportedException();
+        }
         void LoadStatesWithCities(ref ModelBuilder builder)
         {
             List<State> states = new List<State>();
@@ -62,58 +69,61 @@ namespace AngularDotnetCore.Data
             builder.Entity<CategoryGroup>().HasData(new CategoryGroup { Id = 5, Name = "Dịch Vụ (Services)" });
             builder.Entity<CategoryGroup>().HasData(new CategoryGroup { Id = 6, Name = "Linh Tinh (Misc)" });
 
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 1, Id = 1, Name = "Thuê (Share) Phòng" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 1, Id = 2, Name = "Cần & Cho Thuê Nhà, Chung Cư, Apt. Condo" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 1, Id = 1, Name = "Thuê (Share) Phòng", ExternalUrl = "https://mraovat.nguoi-viet.com/classified/phong-cho-thue-rooms-to-share-browse-88.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 1, Id = 2, Name = "Cần & Cho Thuê Nhà, Chung Cư, Apt. Condo", ExternalUrl = "https://mraovat.nguoi-viet.com/classified/nha-cho-thue-house-for-rent-browse-86.aspx, https://mraovat.nguoi-viet.com/classified/apartment-condo-cho-thue-for-rent-browse-87.aspx" });
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 1, Id = 3, Name = "Cần & Cho Thuê Văn Phòng, Cửa Tiệm" });
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 1, Id = 4, Name = "Cần & Cho Thuê Các Thứ Khác" });
 
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 2, Id = 5, Name = "Nail & Beauty Spa Supply" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 2, Id = 6, Name = "Mua Bán Xe / Car" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 2, Id = 6, Name = "Mua Bán Xe / Car", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/xe-ban-auto-for-sale-browse-91.aspx" });
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 2, Id = 7, Name = "Mua Bán Sĩ, Xuất Nhập Khẩu" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 2, Id = 8, Name = "Mua Bán Các Loại" });
-            
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 9, Name = "Cần Thợ Nails & Tóc" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 2, Id = 8, Name = "Mua Bán Các Loại", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/ban-cac-loai-items-for-sale-browse-118.aspx" });
+
+
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 9, Name = "Cần Thợ Nails & Tóc", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/viec-hair-nail-job-browse-96.aspx" });
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 10, Name = "Cần Chăm Sóc Trẻ Em, Người Già" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 11, Name = "Nhận Giữ Trẻ Em Và Chăm Sóc Người Già" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 12, Name = "Giúp Việc Nhà / Domestic Assistance" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 13, Name = "Việc Hãng Xưởng / Manufacturing Job" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 14, Name = "Việc Văn Phòng / Office - Clerical Jobs" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 15, Name = "Việc Chợ / Nhà Hàng - Restaurant/Supermarket" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 16, Name = "Việc Thợ may / Sewing Jobs" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 17, Name = "Các việc khác (General Jobs)" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 11, Name = "Nhận Giữ Trẻ Em Và Chăm Sóc Người Già", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/giu-tre-child-care-babysitter-browse-117.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 12, Name = "Giúp Việc Nhà / Domestic Assistance", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/viec-nha-domestic-assistance-browse-94.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 13, Name = "Việc Hãng Xưởng / Manufacturing Job", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/viec-hang-xuong-manufacturing-jobs-browse-95.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 14, Name = "Việc Văn Phòng / Office - Clerical Jobs", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/viec-van-phong-office-clerical-jobs-browse-97.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 15, Name = "Việc Chợ / Nhà Hàng - Restaurant/Supermarket", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/viec-cho-nha-hang-restaurants-market-jobs-browse-98.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 16, Name = "Việc Thợ may / Sewing Jobs", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/viec-tho-may-sewing-jobs-browse-99.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 17, Name = "Các việc khác (General Jobs)", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/viec-lam-employment-browse-93.aspx" });
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 3, Id = 18, Name = "Người Tìm Việc / Looking for Job" });
 
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 4, Id = 19, Name = "Mua Bán Tiệm Nail & Tóc / Salon Office Transfer" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 4, Id = 20, Name = "Mua Bán Cơ Sở Thương Mại / Business Office" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 4, Id = 21, Name = "Mua Bán Nhà / Real Estate" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 4, Id = 22, Name = "Vay Mượn & Đầu Tư / Loan - Financing" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 4, Id = 20, Name = "Mua Bán Cơ Sở Thương Mại / Business Office", ExternalUrl = "https://mraovat.nguoi-viet.com/classified/sang-nhuong-co-so-business-opportunities-browse-92.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 4, Id = 21, Name = "Mua Bán Nhà / Real Estate", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/nha-ban-house-for-sale-browse-90.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 4, Id = 22, Name = "Vay Mượn & Đầu Tư / Loan - Financing", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/vay-muon-dau-tu-financing-investments-browse-111.aspx" });
 
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 23, Name = "Kế Toán, Luật Pháp, Tư Vấn / Accounting - Laws Service" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 24, Name = "Xây Cất / Construction" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 25, Name = "Sửa Điện, Ống Nước / Electric, Plumbing" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 26, Name = "Sửa Máy Móc Gia Dụng / Appliances Repair" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 27, Name = "Sửa Xe / Car (Auto) Repair" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 28, Name = "Làm Vườn / Landscaping" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 24, Name = "Xây Cất / Construction", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/sua-nha-tiem-construction-browse-105.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 25, Name = "Sửa Điện, Ống Nước / Electric, Plumbing", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/sua-ong-nuoc-plumbing-browse-107.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 26, Name = "Sửa Máy Móc Gia Dụng / Appliances Repair", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/sua-may-moc-appliances-repair-browse-103.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 27, Name = "Sửa Xe / Car (Auto) Repair", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/sua-xe-auto-repair-browse-104.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 28, Name = "Làm Vườn / Landscaping", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/lam-vuon-landscaping-browse-108.aspx" });
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 29, Name = "Máy Tính, Phần Mềm, Web / IT" });
 
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 30, Name = "Dạy Kèm / Tutoring" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 30, Name = "Dạy Kèm / Tutoring", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/day-kem-huan-luyen-tutoring-training-browse-110.aspx" });
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 31, Name = "Đưa Đón / Pickup" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 32, Name = "Du Lịch, Du Học / Travel, Study" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 33, Name = "Đấm Bóp & Thư Giãn / Massage" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 34, Name = "Cơm Tháng / Meal Delivery" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 35, Name = "Dọn Nhà, Chuyển Văn Phòng / Moving" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 36, Name = "Giặt Thảm, Vệ Sinh / Cleaning" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 37, Name = "Bảng Hiệu / Banner" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 38, Name = "Nhắn Tin, Thông Báo / Announcement" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 39, Name = "Các Dịch Vụ Khác / Other Services" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 32, Name = "Du Lịch, Du Học / Travel, Study", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/du-lich-travel-browse-101.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 33, Name = "Đấm Bóp & Thư Giãn / Massage", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/dam-bop-thu-gian-massage-relax-browse-123.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 34, Name = "Cơm Tháng / Meal Delivery", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/com-thang-meal-delivery-browse-116.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 35, Name = "Dọn Nhà, Chuyển Văn Phòng / Moving", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/don-nha-moving-browse-106.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 36, Name = "Giặt Thảm, Vệ Sinh / Cleaning", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/giat-tham-carpet-cleaning-browse-109.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 37, Name = "Bảng Hiệu / Banner", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/bang-hieu-sign-banners-browse-102.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 38, Name = "Nhắn Tin, Thông Báo / Announcement", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/nhan-tin-thong-bao-annoucements-browse-119.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 39, Name = "Các Dịch Vụ Khác / Other Services", 
+                ExternalUrl= "https://mraovat.nguoi-viet.com/classified/dich-vu-services-browse-100.aspx, https://mraovat.nguoi-viet.com/classified/suc-khoe-tham-my-health-beauty-browse-112.aspx, https://mraovat.nguoi-viet.com/classified/tu-vi-chiem-tinh-psychics-astrologers-browse-113.aspx, https://mraovat.nguoi-viet.com/classified/linh-tinh-miscellaneous-browse-114.aspx, https://mraovat.nguoi-viet.com/classified/rao-vat-co-danh-thiep-business-cards-size-ads-browse-122.aspx"
+            });
 
 
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 6, Id = 40, Name = "Lời Nguyện Tôn Giáo / Religious Prayers" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 6, Id = 41, Name = "Tìm Người Thân / Friends and Family Search" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 6, Id = 42, Name = "Tìm Bạn Bốn Phương / Connecting People" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 6, Id = 43, Name = "Đồ Miễn Phí / Free Stuffs" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 6, Id = 40, Name = "Lời Nguyện Tôn Giáo / Religious Prayers", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/loi-nguyen-ton-giao-religious-prayers-browse-115.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 6, Id = 41, Name = "Tìm Người Thân / Friends and Family Search", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/tim-nguoi-than-search-for-family-friends-browse-120.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 6, Id = 42, Name = "Tìm Bạn Bốn Phương / Connecting People", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/tim-ban-bon-phuong-connecting-with-people-browse-121.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 6, Id = 43, Name = "Đồ Miễn Phí / Free Stuffs", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/Do-dung-mien-phi-free-browse-124.aspx" });
 
-        }
+            }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             
