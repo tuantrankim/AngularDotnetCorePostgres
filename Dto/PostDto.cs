@@ -15,6 +15,7 @@ namespace AngularDotnetCore.Dto
         public int? CityId { get; set; }
         public string City { get; set; }
         public int? CategoryId { get; set; }
+        public string Icon { get; set; }
         public string Category { get; set; }
         public string PostalCode { get; set; }
         public string ContactEmail { get; set; }

@@ -37,6 +37,7 @@ namespace AngularDotnetCore.Controllers
             try
             {
                 var allPosts = _context.Posts
+                    .Include(p => p.Category)
                     .Include(p => p.City)
                     .ThenInclude(c => c.State)
                     .OrderByDescending(x=>x.CreatedDate)
@@ -44,12 +45,13 @@ namespace AngularDotnetCore.Controllers
                     {
                         Id = p.Id,
                         Title = p.Title,
-                        Content = "",
+                        Content = "",                        
 
                         CityId = p.CityId,
                         City = p.City.Name + ", " + p.City.State.Abbreviation,
                         CategoryId = p.CategoryId,
                         Category = p.Category.Name,
+                        Icon = p.Category.Icon,
 
                         PostalCode = p.PostalCode,
                         ContactEmail = p.ContactEmail,
@@ -75,7 +77,8 @@ namespace AngularDotnetCore.Controllers
             try
             {
                 IQueryable<Post> query = _context.Posts
-                    .Include(p=>p.City)
+                    .Include(p => p.Category)
+                    .Include(p => p.City)
                     .ThenInclude(c => c.State);
 
                 if ((dto.FromPostId??0) > 0)
@@ -110,6 +113,7 @@ namespace AngularDotnetCore.Controllers
                         City = p.City.Name + ", " + p.City.State.Abbreviation,
                         CategoryId = p.CategoryId,
                         Category = p.Category.Name,
+                        Icon = p.Category.Icon,
 
                         PostalCode = p.PostalCode,
                         ContactEmail = p.ContactEmail,

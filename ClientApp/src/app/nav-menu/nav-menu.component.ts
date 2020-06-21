@@ -15,8 +15,6 @@ export class NavMenuComponent implements OnInit{
       window.addEventListener('scroll', this.scrolling, true);
     }
   isExpanded = false;
-  //public searchCriteria = new PostSearchCriteria();
-  public searchContent = "";
   public showTopIcon = false;
   constructor(private service: PostService, private router: Router, private route: ActivatedRoute) { }
 
@@ -33,31 +31,5 @@ export class NavMenuComponent implements OnInit{
 
   toggle() {
     this.isExpanded = !this.isExpanded;
-  }
-
-  searchPosts() {
-    console.log("on search content");
-    this.service.searchTitleContain = this.searchContent;
-  }
-  //searchPosts2() {
-  //  this.service.searchCriteria.titleContain = this.searchContent;
-  //  this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-  //  this.router.onSameUrlNavigation = 'reload';
-  //  this.router.navigateByUrl('/');
-  //  //window.location.href = "https://localhost:44385/";
-  //}
-
-  onCityChange(city: City) {
-    console.log("on city changed");
-    console.log(city);
-    this.service.searchCityId = city? city.id : null;
-
-  }
-
-  onCategoryChange(category: Category) {
-    this.service.searchCategoryId = category? category.id: null;
-    console.log("on category changed");
-    console.log(category);
-    //this.router.navigate(['/search'], { queryParams: { category: category.id } });
   }
 }

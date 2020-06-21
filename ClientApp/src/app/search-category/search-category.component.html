@@ -1,10 +1,16 @@
 <form>
   <div class="form-group">
+    <ng-template #rt let-r="result" let-t="term">
+      <i class="material-icons mr-4" style="width: 10px">{{r.icon}}</i>
+      <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+    </ng-template>
+
     <label for="searchCategory">Lọc theo phân loại</label>
     <input id="searchCategory" name="searchCategory" type="search" class="form-control"
            placeholder="Vd: share phòng"
            [(ngModel)]="model"
            [ngbTypeahead]="search"
+           [resultTemplate]="rt"
            [inputFormatter]="inputFormatter"
            [resultFormatter]="resultFormatter"
            [editable]="false"
@@ -15,14 +21,13 @@
            #term [ngbTooltip]="tooltipContent(term.value)"
            tooltipClass="btn btn-alert"
            triggers="manual" #t1="ngbTooltip"
-           (search) ="onSearch(t1)"
-           />
+           (search)="onSearch(t1)" />
 
     <!--<span class="input-group-append">
-      <button class="input-group-text bg-transparent" (click)="searchBtnClick(t1)" type="submit">
-        <i class="material-icons">search</i>
-      </button>
-    </span>-->
+    <button class="input-group-text bg-transparent" (click)="searchBtnClick(t1)" type="submit">
+      <i class="material-icons">search</i>
+    </button>
+  </span>-->
 
   </div>
 </form>

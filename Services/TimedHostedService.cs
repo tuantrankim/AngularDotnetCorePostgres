@@ -30,6 +30,7 @@ namespace AngularDotnetCore.Services
         private int _interval = 0;//second
         private DateTime _scheduledTime = DateTime.Now;
         private string _userId;
+        private bool _itemCountEnabled = false;
         public TimedHostedService(IConfiguration configuration, ILogger<TimedHostedService> logger, IServiceScopeFactory scopeFactory)
         {
             _logger = logger;
@@ -41,6 +42,7 @@ namespace AngularDotnetCore.Services
                 _interval = int.Parse(configuration["Scheduler:Interval"]);
                 _scheduledTime = DateTime.Parse(configuration["Scheduler:ScheduledTime"]);
                 _userId = configuration["Scheduler:UserId"];
+                _itemCountEnabled = bool.Parse(configuration["Scheduler:ItemCountEnabled"]);
             }
             catch (Exception ex)
             {
@@ -109,6 +111,7 @@ namespace AngularDotnetCore.Services
                 "Scheduler Service is working. Count: {Count}", count);
 
             await GetContent();
+            await UpdatePostCount();
 
         }
 
@@ -217,6 +220,47 @@ namespace AngularDotnetCore.Services
             }
         }
 
+        private async Task UpdatePostCount()
+        {
+            try
+            {
+                using (var scope = _scopeFactory.CreateScope())
+                {
+                    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                    DateTime startTime = DateTime.Now;
+                    dbContext.EventLogs.Add(new EventLog
+                    {
+                        Message = "Start. Updating Post count",
+                        EventType = "scheduler",
+                        CreatedDate = DateTime.Now
+                    });
+
+                    var postCounts = dbContext.Posts
+                    .GroupBy(c => new { CategoryId = c.CategoryId })
+                    .Select(c => new
+                    {
+                        CategoryId = c.Key.CategoryId,
+                        PostCount = c.Count()
+                    }).ToDictionary(c => c.CategoryId, c => c.PostCount);
+
+                    dbContext.Categories.ToList().ForEach(c => c.PostCount = postCounts.GetValueOrDefault(c.Id));
+
+                    dbContext.EventLogs.Add(new EventLog
+                    {
+                        Message = "End. Updating Post count: " + (DateTime.Now - startTime).TotalSeconds + " (s)",
+                        EventType = "scheduler",
+                        CreatedDate = DateTime.Now
+                    });
+                    var result2 = await dbContext.SaveChangesAsync();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.ToString());
+            }
+
+        }
         public Task StopAsync(CancellationToken stoppingToken)
         {
             _logger.LogInformation("Timed Hosted Service is stopping.");

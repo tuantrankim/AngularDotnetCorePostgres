@@ -21,6 +21,7 @@ import { AdCardComponent } from './ad-card/ad-card.component';
 import { BannerComponent } from './banner/banner.component';
 import { SearchContentComponent } from './search-content/search-content.component';
 import { PostListComponent } from './post-list/post-list.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PostListComponent } from './post-list/post-list.component';
     SearchCategoryComponent,
     AdCardComponent,
     BannerComponent,
-    SearchContentComponent
+    SearchContentComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

@@ -90,7 +90,7 @@ export class SearchCategoryComponent implements OnInit {
     this.service.getAllCategories()
       .subscribe(data => {
         this.categories = [...data];
-        this.categories.unshift({ id: null, name: "---  Tất cả  ---", categoryGroupId: null, categoryGroupName: null });
+        this.categories.unshift({ id: null, icon:null, name: "---  Tất cả  ---", categoryGroupId: null, categoryGroupName: null });
         this.successMessage = `(${this.categories.length} items)`;
       }, error => {
         this.errorMessage = error;

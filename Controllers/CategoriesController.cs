@@ -32,7 +32,13 @@ namespace AngularDotnetCore.Controllers
                 var allCategories = await _context.Categories.Include(c=>c.CategoryGroup)
                     .OrderBy(x => x.CategoryGroupId)
                     .ThenBy(x => x.Id)
-                    .Select(x => new CategoryDto {Id = x.Id, Name = x.Name , CategoryGroupId = x.CategoryGroupId, CategoryGroupName = x.CategoryGroup.Name })
+                    .Select(x => new CategoryDto {
+                        Id = x.Id, 
+                        Icon = x.Icon,
+                        Name = x.Name , 
+                        CategoryGroupId = x.CategoryGroupId, 
+                        CategoryGroupName = x.CategoryGroup.Name
+                    })
                     .ToListAsync();
 
                 return Ok(allCategories);

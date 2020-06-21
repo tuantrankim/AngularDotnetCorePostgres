@@ -1,0 +1,35 @@
+<div class="border-bottom box-shadow mb-3">
+  <div class="container">
+    <div class="d-flex flex-wrap">
+      <div *ngIf="isExpand" class="nav-search">
+        <app-search-city [globalSearch]="true" (cityChange)="onCityChange($event)"></app-search-city>
+      </div>
+      <div *ngIf="isExpand" class="nav-search">
+        <app-search-category [globalSearch]="true" (categoryChange)="onCategoryChange($event)"></app-search-category>
+      </div>
+
+      <div class="nav-search">
+        <form #searchForm="ngForm" (ngSubmit)="searchPosts();">
+          <div class="form-group">
+            <label for="titleContain">Tìm nội dung</label>
+            <div class="input-group">
+              <input id="titleContain" type="search" name="titleContain"
+                     [(ngModel)]="searchContent"
+                     placeholder="Nhập nội dung cần tìm ..."
+                     class="form-control"
+                     (search)="searchPosts()">
+
+              <span class="input-group-append">
+                <button class="input-group-text bg-transparent" type="button" (click)="onExpand()">
+                  <i *ngIf="!isExpand" class="material-icons">expand_more</i>
+                  <i *ngIf="isExpand" class="material-icons">expand_less</i>
+                </button>
+              </span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

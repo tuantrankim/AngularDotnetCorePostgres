@@ -16,5 +16,8 @@ namespace AngularDotnetCore.Models
         public CategoryGroup CategoryGroup { get; set; }
         [StringLength(2000)]
         public string ExternalUrl { get; set; }
+        [StringLength(50)]
+        public string Icon { get; set; }
+        public int? PostCount { get; set; }
     }
 }

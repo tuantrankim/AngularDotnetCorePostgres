@@ -50,39 +50,6 @@
     </div>
   </nav>
   <div class="offset-navbar"></div>
-  <div class="border-bottom box-shadow mb-3">
-    <div class="container">
-      <div class="d-flex flex-wrap">
-        <div class="nav-search">
-          <app-search-city [globalSearch]="true" (cityChange)="onCityChange($event)"></app-search-city>
-        </div>
-        <div class ="nav-search">
-          <app-search-category [globalSearch]="true" (categoryChange)="onCategoryChange($event)"></app-search-category>
-        </div>
-
-          <div class="nav-search">
-            <form #searchForm="ngForm" (ngSubmit)="searchPosts();">
-              <div class="form-group">
-                <label for="titleContain">Tìm nội dung</label>
-                <input id="titleContain" type="search" name="titleContain"
-                       [(ngModel)]="searchContent"
-                       placeholder="Nhập nội dung cần tìm ..."
-                       class="form-control"
-                       (search)="searchPosts()">
-
-                <!--<span class="input-group-append">
-                  <button class="input-group-text bg-transparent" type="submit">
-                    <i class="material-icons">search</i>
-                  </button>
-                </span>-->
-              </div>
-            </form>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
 </header>
 
 <span id="top-link-block" (scroll)="scrolling($event)" [ngClass]="{'affix-show': showTopIcon, 'affix-hide': !showTopIcon}">

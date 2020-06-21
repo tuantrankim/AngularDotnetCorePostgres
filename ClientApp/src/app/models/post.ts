@@ -5,6 +5,7 @@ export class Post
   createdDate: Date;
   modifiedDate: Date;
 
+  icon: string;
   title: string;
   content: string;
   contactEmail: string;
