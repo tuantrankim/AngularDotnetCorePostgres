@@ -135,3 +135,99 @@ https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services?v
 example
 
 https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/hosted-services/samples/3.x/BackgroundTasksSample
+
+### Generate self signed certificate in Ubuntu
+
+https://www.youtube.com/watch?v=XrZxJsKUQR8
+```
+(old way)
+1- Generate our private key
+openssl genrsa 1024 > raovat.key
+
+2- Generate certificate signing request
+openssl req -new -key ./raovat.key > raovat.csr
+
+Fill out the questions
+
+Country name (2 letter code): US
+State or Province Name: CALIFORNIA
+Locality Name: IRVINE
+Organizational Name: raovat
+Organizational Unit Name: <empty>
+Common Name (important): raovat.com
+Email Address: tuantrankim@gmail.com
+
+3- Sign certificate with our own key
+openssl x509 -in raovat.csr -out raovat.crt -req -signkey raovat.key -days 35600
+
+(new way)
+https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-18-04
+Step 1 – Creating the SSL Certificate
+sudo openssl req -x509 -sha256 -nodes -days 36500 -newkey rsa:4096 -keyout /etc/ssl/private/raovat.key -out /etc/ssl/certs/raovat.crt
+
+Step 2 – Configuring Apache to Use SSL
+sudo nano /etc/apache2/conf-available/ssl-params.conf
+
+# Copy and paste to the file
+SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
+SSLProtocol All -SSLv2 -SSLv3 -TLSv1 -TLSv1.1
+SSLHonorCipherOrder On
+# Disable preloading HSTS for now.  You can use the commented out header line that includes
+# the "preload" directive if you understand the implications.
+# Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+Header always set X-Frame-Options DENY
+Header always set X-Content-Type-Options nosniff
+# Requires Apache >= 2.4
+SSLCompression off
+SSLUseStapling on
+SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
+# Requires Apache >= 2.4.11
+SSLSessionTickets Off
+
+
+
+DO NOT USE default-ssl.conf 
+
+Rename file default-ssl.conf
+sudo cp /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf.bak
+
+https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-apache?view=aspnetcore-3.1
+
+For sharing host. We need to add ServerName and ServerAlias to each virtual host config. 
+E.g: raovat.com.conf, shop.com.conf
+
+sudo nano /etc/apache2/sites-available/raovat.com.conf 
+
+<VirtualHost *:*>
+    RequestHeader set "X-Forwarded-Proto" expr=%{REQUEST_SCHEME}
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerName raovat.com
+    ServerAlias *.raovat.com
+
+    RewriteEngine On
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName raovat.com
+    ServerAlias *.raovat.com
+
+    ProxyPreserveHost On
+    ProxyPass / http://127.0.0.1:5000/
+    ProxyPassReverse / http://127.0.0.1:5000/
+    ErrorLog /var/log/httpd/helloapp-error.log
+    CustomLog /var/log/httpd/helloapp-access.log common
+    
+    SSLEngine on
+    SSLProtocol all -SSLv2
+    SSLCipherSuite ALL:!ADH:!EXPORT:!SSLv2:!RC4+RSA:+HIGH:+MEDIUM:!LOW:!RC4
+    SSLCertificateFile /etc/ssl/certs/raovat.crt
+    SSLCertificateKeyFile /etc/ssl/private/raovat.key
+</VirtualHost>
+
+
+sudo systemctl restart apache2
+```
