@@ -14,7 +14,7 @@
     <div class="card-footer">
       <div class="d-flex">
         <div class="pr-2">
-          <span class="material-icons text-warning">
+          <span class="material-icons text-success card-icon">
             {{post.icon}}
           </span>
         </div>
@@ -24,11 +24,11 @@
         </div>
 
         <div class="mr-auto">
-          Ngày {{ post.createdDate | date:'shortDate' }}
+          Ngày {{ post.createdDate | date:'d/M/yy' }}
         </div>
 
         <div>
-          <span class="material-icons">
+          <span class="material-icons card-icon">
             share
           </span>
         </div>
