@@ -37,10 +37,7 @@ html {
 .navbar-item {
     border: red 2px solid;
 }
-.logo {
-    height: 6vh;
-    margin-left: 0;
-}
+
 
 
 #top-link-block.affix-show {

@@ -1,40 +1,45 @@
 
 
-  <div class="card-container d-flex flex-wrap ">
-    <div class="card" *ngFor="let post of posts">
-      <!--<a href="#" class="card-link" title="Click để xem chi tiết">-->
-      <div class="card-header">
-        <div class="row">
-          <span class="material-icons text-left">
+<div class="card-container d-flex flex-wrap ">
+  <div class="card" *ngFor="let post of posts">
+    <!--<a href="#" class="card-link" title="Click để xem chi tiết">-->
+    <!--End card header-->
+    <!--<img class="card-img-top" src="{{card['img']}}" alt="Card image cap">-->
+
+    <div class="card-body">
+      <p class="card-text"> {{ post.title }} </p>
+    </div>
+
+
+    <div class="card-footer">
+      <div class="d-flex">
+        <div class="pr-2">
+          <span class="material-icons text-warning">
             {{post.icon}}
           </span>
-          <div class="col-10 text-center">
-            <!--{{ cities | filter : {'id':post.cityId} }}-->
-            {{post.city}}
-          </div>
-          <span class="material-icons  text-right">
+        </div>
+
+        <div class="pr-2">
+          {{post.city}}.
+        </div>
+
+        <div class="mr-auto">
+          Ngày {{ post.createdDate | date:'shortDate' }}
+        </div>
+
+        <div>
+          <span class="material-icons">
             share
           </span>
         </div>
-      </div>
-      <!--End card header-->
-      <!--<img class="card-img-top" src="{{card['img']}}" alt="Card image cap">-->
 
-      <div class="card-body">
-        <p class="card-text"> {{ post.title }} </p>
-        <p class="card-text float-right"> [{{ post.createdDate | date }}] </p>
       </div>
-
-      <!--<div style="height: 200px; width: 200px">
-        <div class="card-body">
-          <p class="card-text"> {{ post.title }}</p>
-          <p class="card-text float-right"> [{{ post.createdDate | date }}] </p>
-        </div>
-      </div>-->
-      <!--</a>-->
     </div>
 
+
   </div>
+
+</div>
 
 <div class="text-center">
   <button class="btn btn-outline-secondary" (click)="loadMore()"><<< Xem thêm >>></button>
