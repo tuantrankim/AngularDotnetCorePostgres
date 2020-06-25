@@ -11,7 +11,7 @@ namespace AngularDotnetCore.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "Name",
-                value: "Phòng	Cho Thuê (Rooms to Share)");
+                value: "Phòng Cho Thuê (Rooms to Share)");
 
             migrationBuilder.UpdateData(
                 table: "Categories",

@@ -11,7 +11,7 @@ export class CategoryListComponent implements OnInit {
   
   categories_full: Category[] = [
     { id: 9, name: "Cần Thợ Hair, Nails (Hair, Nail Jobs)", categoryGroupId: 3, icon:"dry", categoryGroupName: null },
-    { id: 1, name:"Phòng	Cho Thuê (Rooms to Share)", categoryGroupId: 1, icon:"meeting_room", categoryGroupName: null },
+    { id: 1, name:"Phòng Cho Thuê (Rooms to Share)", categoryGroupId: 1, icon:"meeting_room", categoryGroupName: null },
     { id: 6, name:"Mua Bán Xe (Cars for Sale)", categoryGroupId: 2, icon:"drive_eta", categoryGroupName: null },
     { id: 17, name:"Việc Làm (Employment)", categoryGroupId: 3, icon:"people", categoryGroupName: null },
     { id: 2, name: "Apt. Condo Cho Thuê (Apt. Condo for Rent)", categoryGroupId: 1, icon:"apartment", categoryGroupName: null },
@@ -33,7 +33,7 @@ export class CategoryListComponent implements OnInit {
   ];
   categories: Category[] = this.categories_full;
 
-  public isExpand = false;
+  public isExpand = true;
   successMessage: string = "";
   errorMessage: string = "";
   constructor(private service: PostService) {
@@ -48,8 +48,8 @@ export class CategoryListComponent implements OnInit {
     this.service.getAllCategories()
       .subscribe(data => {
         this.service.setAllCategories(data);
-        this.onExpand();
         this.categories_full = data;
+        this.onExpand();
         this.successMessage = `(${this.categories.length} items)`;
       }, error => {
         this.errorMessage = error;

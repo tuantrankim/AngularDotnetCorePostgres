@@ -69,7 +69,7 @@ namespace AngularDotnetCore.Data
             builder.Entity<CategoryGroup>().HasData(new CategoryGroup { Id = 5, Name = "Dịch Vụ (Services)" });
             builder.Entity<CategoryGroup>().HasData(new CategoryGroup { Id = 6, Name = "Linh Tinh (Misc)" });
 
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 1, Id = 1, Icon = "meeting_room", Name = "Phòng	Cho Thuê (Rooms to Share)", ExternalUrl = "https://mraovat.nguoi-viet.com/classified/phong-cho-thue-rooms-to-share-browse-88.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 1, Id = 1, Icon = "meeting_room", Name = "Phòng Cho Thuê (Rooms to Share)", ExternalUrl = "https://mraovat.nguoi-viet.com/classified/phong-cho-thue-rooms-to-share-browse-88.aspx" });
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 1, Id = 2, Icon = "apartment", Name = "Apt. Condo Cho Thuê (Apt. Condo for Rent)", ExternalUrl = "https://mraovat.nguoi-viet.com/classified/apartment-condo-cho-thue-for-rent-browse-87.aspx" });
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 1, Id = 3, Icon = "store_mall_directory", Name = "Văn Phòng, Cửa Tiệm Cho Thuê (Office for Lease)" });
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 1, Id = 4, Icon = "house", Name = "Nhà Cho Thuê (House for Rent)", ExternalUrl = "https://mraovat.nguoi-viet.com/classified/nha-cho-thue-house-for-rent-browse-86.aspx"  });
@@ -94,7 +94,7 @@ namespace AngularDotnetCore.Data
 
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 4, Id = 19, Icon = "storefront", Name = "Mua Bán Tiệm Nail & Tóc (Salon Office Transfer)" });
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 4, Id = 20, Icon = "store_mall_directory ", Name = "Sang Nhượng Cơ Sở (Business Opportunities)", ExternalUrl = "https://mraovat.nguoi-viet.com/classified/sang-nhuong-co-so-business-opportunities-browse-92.aspx" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 4, Id = 21, Icon = "house", Name = "    ", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/nha-ban-house-for-sale-browse-90.aspx" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 4, Id = 21, Icon = "house", Name = "Mua Bán Nhà (Real Estate)", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/nha-ban-house-for-sale-browse-90.aspx" });
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 4, Id = 22, Icon = "attach_money", Name = "Vay Mượn & Đầu Tư (Loan, Financing)", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/vay-muon-dau-tu-financing-investments-browse-111.aspx" });
 
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 5, Id = 23, Icon = "gavel", Name = "Kế Toán, Luật Pháp, Tư Vấn (Accounting, Laws Service)" });
