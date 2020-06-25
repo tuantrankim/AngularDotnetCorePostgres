@@ -27,6 +27,8 @@ export class PostService {
   private _searchCategoryId: number;
 
   private _cities: City[];
+  private _categories: Category[];
+
   constructor(private http: HttpClient) {
     if (environment.baseUrl) this.baseUrl = environment.baseUrl;
     else this.baseUrl = window.location.origin + '/api/';
@@ -202,10 +204,31 @@ export class PostService {
   }
 
   getAllCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.categoryUrl + 'all')
-      .pipe(catchError(this.handleError));
-  }
+    if (!this._categories) {
+      let items: Category[];
+      try {
+        items = JSON.parse(localStorage.getItem("categories"));
+      }
+      catch
+      {
+        localStorage.removeItem("categories");
+      }
 
+      if (!items || items.length == 0) {
+        return this.http.get<Category[]>(this.categoryUrl + 'all')
+          .pipe(catchError(this.handleError));
+      }
+      else this._categories = items;
+    }
+
+    return of(this._categories);
+  }
+  setAllCategories(value: Category[]) {
+    if (value !== this._categories) {
+      this._categories = value;
+      localStorage.setItem("categories", JSON.stringify(value));
+    }
+  }
   removeAccents(str) {
     var AccentsMap = [
       "aàảãáạăằẳẵắặâầẩẫấậ",

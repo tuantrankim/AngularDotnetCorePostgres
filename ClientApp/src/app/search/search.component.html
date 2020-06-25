@@ -1,4 +1,4 @@
-<div class="border-bottom box-shadow mb-3">
+<div class="box-shadow mb-3">
   <div class="container">
     <div class="d-flex flex-wrap">
       <div *ngIf="isExpand" class="nav-search">
@@ -20,7 +20,7 @@
                      (search)="searchPosts()">
 
               <span class="input-group-append">
-                <button class="input-group-text bg-transparent" type="button" (click)="onExpand()">
+                <button class="input-group-text btn" type="button" (click)="onExpand()">
                   <i *ngIf="!isExpand" class="material-icons">expand_more</i>
                   <i *ngIf="isExpand" class="material-icons">expand_less</i>
                 </button>

@@ -22,6 +22,7 @@ import { BannerComponent } from './banner/banner.component';
 import { SearchContentComponent } from './search-content/search-content.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { SearchComponent } from './search/search.component';
+import { CategoryListComponent } from './category-list/category-list.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SearchComponent } from './search/search.component';
     AdCardComponent,
     BannerComponent,
     SearchContentComponent,
-    SearchComponent
+    SearchComponent,
+    CategoryListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -48,7 +50,8 @@ import { SearchComponent } from './search/search.component';
     NgbTooltipModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'search/:fromPostId/:cityId/:categoryId/:titleContain', component: PostListComponent },
+      { path: 'category/:categoryId/:categoryDescription', component: PostListComponent },
+      { path: 'post/:postId/:postTitle', component: PostListComponent },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
       { path: 'create-post', component: CreatePostComponent, canActivate: [AuthorizeGuard] },

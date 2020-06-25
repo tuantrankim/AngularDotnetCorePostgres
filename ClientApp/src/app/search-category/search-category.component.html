@@ -5,7 +5,7 @@
       <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
     </ng-template>
 
-    <label for="searchCategory">Lọc theo phân loại</label>
+    <label *ngIf="globalSearch" for="searchCategory">Lọc theo phân loại</label>
     <input id="searchCategory" name="searchCategory" type="search" class="form-control"
            placeholder="Vd: share phòng"
            [(ngModel)]="model"

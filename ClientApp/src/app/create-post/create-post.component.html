@@ -17,13 +17,13 @@
       </div>
     </div>
   </div>
-  <div class="form-group">
+  <!--<div class="form-group">
     <label for="content">Nội Dung Chi Tiết / Detail</label>
     <textarea type="text" name="content" rows="5"
               [(ngModel)]="newPost.content"
               #content="ngModel" class="form-control"> </textarea>
 
-  </div>
+  </div>-->
 
   <div class="form-group">
     <label for="contactPhone">Điện Thoại Liên Lạc / Contact Phone</label>
@@ -46,12 +46,12 @@
 
   <div class="form-group">
     <label for="cityId">Danh mục / Category</label>
-    <app-search-category [globalSearch]="true" (categoryChange)="onCategoryChange($event)"></app-search-category>
+    <app-search-category [globalSearch]="false" (categoryChange)="onCategoryChange($event)"></app-search-category>
   </div>
 
   <div class="form-group">
     <label for="cityId">Thành Phố / City</label>
-    <app-search-city [globalSearch]="true" (cityChange)="onCityChange($event)"></app-search-city>
+    <app-search-city [globalSearch]="false" (cityChange)="onCityChange($event)"></app-search-city>
   </div>
 
   <div class="form-group">
@@ -60,25 +60,15 @@
            [(ngModel)]="newPost.postalCode"
            #postalCode="ngModel" class="form-control">
   </div>
-  <!--<label for="category">Category</label>
-  <select name="category" [(ngModel)]="course.category" required #category="ngModel" class="form-control">
-    <option value=null></option>
-    <option *ngFor="let item of categories" [value]="item.id">{{item.name}}</option>
-  </select>
-  <div class="alert alert-danger" *ngIf="category.touched && !category.valid">
-    <div *ngIf="category.errors.required">Category is required</div>
-  </div>
-  <label for="isGuarantee_id">
-    <input type="checkbox" name="isGuarantee" id="isGuarantee_id"
-    [(ngModel)] = "course.isGuarantee"
-    > 30-day money-back guarantee?
-  </label>-->
-  <!-- [disabled]="!f.valid" -->
+
   <button class="btn btn-primary btn-create-post" type="submit" [disabled]="!f.valid">
     Đăng tin
-  </button>
-  
-  <div class="alert alert-danger mt-2" role="alert" *ngIf="errorMessage"><strong>{{errorMessage}}</strong></div>
+   </button>
 
-  <div class="alert alert-success mt-2" role="alert" *ngIf="successMessage "><strong>Tin đã được lưu / Post was saved successfully.</strong></div>
+  <a class="btn btn-outline-secondary ml-5" routerLink="/">
+      Trở về trang chủ
+  </a>
+    <div class="alert alert-danger mt-2" role="alert" *ngIf="errorMessage"><strong>{{errorMessage}}</strong></div>
+
+    <div class="alert alert-success mt-2" role="alert" *ngIf="successMessage "><strong>Tin đã được lưu / Post was saved successfully.</strong></div>
 </form>

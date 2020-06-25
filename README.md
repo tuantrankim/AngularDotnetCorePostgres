@@ -231,3 +231,7 @@ sudo nano /etc/apache2/sites-available/raovat.com.conf
 
 sudo systemctl restart apache2
 ```
+
+# Google webmaster tool
+
+https://search.google.com/search-console?resource_id=sc-domain%3Araovatvietmy.com&hl=en

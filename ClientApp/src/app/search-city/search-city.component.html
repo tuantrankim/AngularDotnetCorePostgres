@@ -1,6 +1,6 @@
 <form>
   <div class="form-group">
-    <label for="searchCity">Lọc theo thành phố</label>
+    <label *ngIf="globalSearch" for="searchCity">Lọc theo thành phố</label>
     <input id="searchCity" name="searchCity" type="search" class="form-control"
            placeholder="Vd: Foutain Valley, CA"
            [(ngModel)]="model"

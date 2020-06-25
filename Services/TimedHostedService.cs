@@ -241,7 +241,7 @@ namespace AngularDotnetCore.Services
                     {
                         CategoryId = c.Key.CategoryId,
                         PostCount = c.Count()
-                    }).ToDictionary(c => c.CategoryId, c => c.PostCount);
+                    }).ToDictionary(c => c.CategoryId ?? 0, c => c.PostCount);
 
                     dbContext.Categories.ToList().ForEach(c => c.PostCount = postCounts.GetValueOrDefault(c.Id));
 

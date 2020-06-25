@@ -1,6 +1,7 @@
+<app-search></app-search>
+<app-category-list></app-category-list>
 
-
-<div class="card-container d-flex flex-wrap ">
+<div class="d-flex flex-wrap ">
   <div class="card" *ngFor="let post of posts">
     <!--<a href="#" class="card-link" title="Click để xem chi tiết">-->
     <!--End card header-->
@@ -14,9 +15,11 @@
     <div class="card-footer">
       <div class="d-flex">
         <div class="pr-2">
-          <span class="material-icons text-success card-icon">
-            {{post.icon}}
-          </span>
+          <a [routerLink]="['/category', post.categoryId, urlFriendly(post.category)]" routerLinkActive="active">
+            <span class="material-icons text-success card-icon">
+              {{post.icon}}
+            </span>
+          </a>
         </div>
 
         <div class="pr-2">
@@ -28,9 +31,11 @@
         </div>
 
         <div>
-          <span class="material-icons card-icon">
-            share
-          </span>
+          <a [routerLink]="['/post', post.id, urlFriendly(post.title)]" routerLinkActive="active">
+            <span class="material-icons card-icon">
+              share
+            </span>
+          </a>
         </div>
 
       </div>

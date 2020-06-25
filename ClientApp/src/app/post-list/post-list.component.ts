@@ -15,37 +15,31 @@ export class PostListComponent implements OnInit, OnDestroy{
   public posts: Post[];
   public errorMessage;
   public successMessage;
-  public searchCity: number;
-  public searchCategory: number;
-  public searchContent: string;
+  public cityId: number;
+  public categoryId: number;
+  public content: string;
+  public postId: number;
   private subscription: Subscription;
 
   constructor(private service: PostService, private route: ActivatedRoute) { }
   ngOnInit() {
-    // this.route.paramMap.subscribe(params => {
-    //   this.searchCity = +params.get('city');
-    //   this.searchCategory = +params.get('category');
-    //   this.searchContent = params.get('content');
-
-    //   if (this.searchCity || this.searchCategory || this.searchContent) {
-    //     const criteria: PostSearchCriteria = {
-    //       fromPostId: 0,
-    //       titleContain: this.searchContent,
-    //       cityId: this.searchCity,
-    //       categoryId: this.searchCategory,
-    //     };
-
-    //     this.searchPosts(criteria);
-    //   }
-    //   else this.getPosts();
-
-
-    // });
+    
 
     this.subscription = this.service.notifyObservable$.subscribe((criteria: PostSearchCriteria) => {
       if(!criteria) this.getPosts();
       else this.searchPosts(criteria);
     });
+
+     this.route.paramMap.subscribe(params => {
+       this.cityId = +params.get('cityId');
+       this.categoryId = +params.get('categoryId');
+       this.postId = +params.get('postId');
+       this.content = params.get('content');
+
+       if (this.categoryId) {
+         this.service.searchCategoryId = this.categoryId;
+       }
+     });
   }
   
   ngOnDestroy(): void {
@@ -88,5 +82,10 @@ export class PostListComponent implements OnInit, OnDestroy{
         }
         );
     }
+  }
+
+  urlFriendly(str) {
+    var url = str.substr(0, 200);
+    return this.service.removeAccents(url).replace(/[^a-zA-Z0-9]/g, '-').replace(/--+/g, '-');
   }
 }
