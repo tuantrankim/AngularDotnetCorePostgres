@@ -4,6 +4,8 @@ import { PostService } from '../services/post.service';
 import { PostSearchCriteria } from '../models/postSearchCriteria';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Category } from '../models/Category';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-post-list',
@@ -20,14 +22,22 @@ export class PostListComponent implements OnInit, OnDestroy{
   public content: string;
   public postId: number;
   private subscription: Subscription;
-
-  constructor(private service: PostService, private route: ActivatedRoute) { }
+  currentCategory: Category;
+  constructor(private titleService: Title, private metaService: Meta, private service: PostService, private route: ActivatedRoute) { }
   ngOnInit() {
     
 
     this.subscription = this.service.notifyObservable$.subscribe((criteria: PostSearchCriteria) => {
       if(!criteria) this.getPosts();
       else this.searchPosts(criteria);
+
+      this.currentCategory = this.service.searchCategory;
+      if (this.currentCategory) {
+        const title = this.currentCategory.name + ' | Rao Vặt Việt Mỹ - đăng tin miễn phí - Classified Ads';
+        this.titleService.setTitle(title);
+        this.metaService.updateTag({ name: 'keywords', content: title });
+        this.metaService.updateTag({ name: 'description', content: title });
+      }
     });
 
      this.route.paramMap.subscribe(params => {
@@ -35,7 +45,7 @@ export class PostListComponent implements OnInit, OnDestroy{
        this.categoryId = +params.get('categoryId');
        this.postId = +params.get('postId');
        this.content = params.get('content');
-
+       
        if (this.categoryId) {
          this.service.searchCategoryId = this.categoryId;
        }
@@ -87,5 +97,9 @@ export class PostListComponent implements OnInit, OnDestroy{
   urlFriendly(str) {
     var url = str.substr(0, 200);
     return this.service.removeAccents(url).replace(/[^a-zA-Z0-9]/g, '-').replace(/--+/g, '-');
+  }
+
+  onCategoryReset() {
+    this.service.searchCategoryId = null;
   }
 }

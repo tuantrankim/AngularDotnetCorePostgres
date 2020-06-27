@@ -32,7 +32,6 @@ export class CategoryListComponent implements OnInit {
     { id: 11, name:"Giữ Trẻ (Child Care)", categoryGroupId: 3, icon:"baby_changing_station", categoryGroupName: null }
   ];
   categories: Category[] = this.categories_full;
-
   public isExpand = true;
   successMessage: string = "";
   errorMessage: string = "";

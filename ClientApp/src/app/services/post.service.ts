@@ -76,13 +76,21 @@ export class PostService {
     }
     return this._searchCategoryId;
   }
-
+ 
   public set searchCategoryId(value: number) {
     if (value !== this._searchCategoryId) {
       this._searchCategoryId = value;
       localStorage.setItem("searchCategoryId", JSON.stringify(value));
       this.notify.next(this.searchCriteria);
     }
+  }
+
+  public get searchCategory() {
+    let cid = this.searchCategoryId;
+    if (!cid || !this._categories) return null;
+
+    let c = this._categories.find(x => x.id == cid);
+    return c;
   }
 
   public get searchTitleContain() {
