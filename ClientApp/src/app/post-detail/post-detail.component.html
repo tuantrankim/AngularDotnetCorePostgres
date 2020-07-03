@@ -1,0 +1,14 @@
+<div class="p-2 mb-4">
+  <h4>{{ post.title }}</h4>
+  <div class="pr-2">
+    Thành phố: {{post.city}}
+  </div>
+  <div class="mr-auto">
+    Đăng Ngày: {{ post.createdDate | date:'d/M/yy' }}
+  </div>
+  <p class="pt-4 pr-4">{{ post.content}}</p>
+  <div>Liên Lạc: </div>
+  <div>{{post.contactEmail}}</div>
+  <div>{{post.contactPhone}}</div>
+  <div>Danh mục: {{post.category}}</div>
+</div>

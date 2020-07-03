@@ -20,6 +20,7 @@ import { SearchContentComponent } from './search-content/search-content.componen
 import { PostListComponent } from './post-list/post-list.component';
 import { SearchComponent } from './search/search.component';
 import { CategoryListComponent } from './category-list/category-list.component';
+import { PostDetailComponent } from './post-detail/post-detail.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { CategoryListComponent } from './category-list/category-list.component';
     SearchCategoryComponent,
     SearchContentComponent,
     SearchComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    PostDetailComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -44,12 +46,12 @@ import { CategoryListComponent } from './category-list/category-list.component';
     NgbTypeaheadModule,
     NgbTooltipModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'category/:categoryId/:categoryDescription', component: PostListComponent },
-      { path: 'post/:postId/:postTitle', component: PostListComponent },
+      { path: '', component: HomeComponent, pathMatch: 'full', data: { kind: 'search' } },
+      { path: 'category/:categoryId/:categoryDescription', component: PostListComponent, data: { kind: 'category' } },
+      { path: 'post/:postId/:postTitle', component: PostListComponent, data: { kind: 'post' } },
       //{ path: 'counter', component: CounterComponent },
       //{ path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-      //{ path: 'create-post', component: CreatePostComponent, canActivate: [AuthorizeGuard] },
+      { path: 'create-post', component: CreatePostComponent, canActivate: [AuthorizeGuard] },
     ])
   ],
   providers: [

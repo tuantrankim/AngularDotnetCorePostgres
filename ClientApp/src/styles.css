@@ -177,7 +177,7 @@ input[type=search] {
   padding: 0px;
 }
 
-.nav-search label {
+.nav-search label, .small-label {
   color: #0069d9;
   font-size: small;
   font-weight: bold;

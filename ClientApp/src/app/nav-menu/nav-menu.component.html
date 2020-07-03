@@ -53,5 +53,5 @@
 </header>
 
 <span id="top-link-block" (scroll)="scrolling($event)" [ngClass]="{'affix-show': showTopIcon, 'affix-hide': !showTopIcon}">
-  <a href="#top" onclick="$('html,body').animate({scrollTop:0},'slow');return false;"><span><i class="material-icons text-primary" style="font-size:48px;">arrow_circle_up</i></span></a>
+  <span (click)="gotoTop()"><i class="material-icons text-primary" style="font-size:48px;">arrow_circle_up</i></span>
 </span>

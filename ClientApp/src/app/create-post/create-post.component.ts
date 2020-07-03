@@ -39,9 +39,11 @@ export class CreatePostComponent implements OnInit {
     this.service.addNewPost(p)
     .subscribe(data => {
       this.successMessage = JSON.stringify(data);
+      this.errorMessage = null;
       this.myForm.resetForm();
     }, error => {
-      this.errorMessage = JSON.stringify(error);
+        this.errorMessage = JSON.stringify(error);
+        this.successMessage = null;
     }
     );
   }

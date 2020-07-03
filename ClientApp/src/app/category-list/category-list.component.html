@@ -1,7 +1,7 @@
 <div class="d-flex flex-wrap mb-3">
   <div class="category" *ngFor="let category of categories">
     <!--each category-->
-    <a [routerLink]="['/category', category.id, urlFriendly(category.name)]" routerLinkActive="active">
+    <a [routerLink]="['/category', category.id, service.urlFriendly(category.name)]" routerLinkActive="active">
       <div class="d-flex">
         <div>
           <span class="material-icons text-success category-icon">
@@ -17,11 +17,17 @@
 
   </div>
   <div class="ml-auto">
-    <button class="input-group-text btn mt-2 mr-4" type="button" (click)="onExpand()">
-      <i *ngIf="!isExpand" class="material-icons">expand_more</i>
-      <i *ngIf="isExpand" class="material-icons">expand_less</i>
-    </button>
+    <div class="mt-2 mr-4 text-primary" (click)="onExpand()">
+      <span *ngIf="!isExpand" >Tất cả >></span>
+      <span *ngIf="isExpand" >Rút gọn <<</span>
+    </div>
   </div>
 </div>
 
+<!--<div class="ml-auto">
+  <button class="input-group-text btn mt-2 mr-4" type="button" (click)="onExpand()">
+    <i *ngIf="!isExpand" class="material-icons">expand_more</i>
+    <i *ngIf="isExpand" class="material-icons">expand_less</i>
+  </button>
+</div>-->
 

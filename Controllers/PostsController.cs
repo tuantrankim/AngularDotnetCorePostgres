@@ -140,7 +140,29 @@ namespace AngularDotnetCore.Controllers
             try
             {
                 var post = _context.Posts
+                    .Include(p => p.Category)
+                    .Include(p => p.City)
+                    .ThenInclude(c => c.State)
+
                     .Where(p => p.Id == id)
+                    .Select(p => new PostDto()
+                    {
+                        Id = p.Id,
+                        Title = p.Title,
+                        Content = p.Content,
+
+                        CityId = p.CityId,
+                        City = p.City.Name + ", " + p.City.State.Abbreviation,
+                        CategoryId = p.CategoryId,
+                        Category = p.Category.Name,
+                        Icon = p.Category.Icon,
+
+                        PostalCode = p.PostalCode,
+                        ContactEmail = p.ContactEmail,
+                        ContactPhone = p.ContactPhone,
+                        CreatedDate = p.CreatedDate,
+                        ModifiedDate = p.ModifiedDate
+                    })
                     .FirstOrDefault();
                 if (post != null) return Ok(post);
                 else return NotFound();
@@ -165,6 +187,11 @@ namespace AngularDotnetCore.Controllers
             {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 //var user = _context.Users.Where(u => u.Id == userId).FirstOrDefault();
+
+                var postCount = _context.Posts
+                    .Where(p => p.OwnerId == userId && p.CreatedDate >= DateTime.Today)
+                    .Count();
+                if (postCount > 5) return ValidationProblem("Spam restriction");
 
                 Post model = new Post { 
                     OwnerId = userId,

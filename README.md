@@ -1,5 +1,9 @@
 ﻿List
--https
+-facebook Manager
+-facebook Page
+-facebook pixel
+
+-https: done
 -facebook login
 -UI logo-nav and card items -mobile and laptop
 -performance
@@ -114,6 +118,8 @@ PM> update-database 20200524180826_add_states_cities
 
 
 ```
+### Add new google analytic account
+https://marketingplatform.google.com/about/analytics/
 
 ### from startup file uncomment to run in https
 //app.UseHttpsRedirection();

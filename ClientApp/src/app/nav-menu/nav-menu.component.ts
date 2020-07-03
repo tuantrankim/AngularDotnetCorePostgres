@@ -24,7 +24,13 @@ export class NavMenuComponent implements OnInit{
     if (sc >= 100) { this.showTopIcon = true }
     else { this.showTopIcon = false }
   }
-
+  gotoTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
   collapse() {
     this.isExpanded = false;
   }

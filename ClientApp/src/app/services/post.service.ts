@@ -108,6 +108,10 @@ export class PostService {
     }
   }
 
+  public urlFriendly(str) {
+    var url = str.substr(0, 200);
+    return this.removeAccents(url).replace(/[^a-zA-Z0-9]/g, '-').replace(/--+/g, '-');
+  }
   //public get searchContent()
   //{
   //  return this.searchCriteria.titleContain;
@@ -175,10 +179,14 @@ export class PostService {
   }
 
   getLatestPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(this.postUrl + 'getLatest',)
+    return this.http.get<Post[]>(this.postUrl + 'getLatest')
       .pipe(catchError(this.handleError));
   }
 
+  getPost(postId: number): Observable<Post> {
+    return this.http.get<Post>(this.postUrl + 'get' + '/' + postId)
+      .pipe(catchError(this.handleError));
+  }
   addNewPost(newPost: Post) {
     return this.http.post<Post>(this.postUrl + 'addnew', newPost)
       .pipe(catchError(this.handleError));

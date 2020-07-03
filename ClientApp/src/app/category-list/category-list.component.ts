@@ -32,7 +32,7 @@ export class CategoryListComponent implements OnInit {
     { id: 11, name:"Giữ Trẻ (Child Care)", categoryGroupId: 3, icon:"baby_changing_station", categoryGroupName: null }
   ];
   categories: Category[] = this.categories_full;
-  public isExpand = true;
+  public isExpand = false;
   successMessage: string = "";
   errorMessage: string = "";
   constructor(private service: PostService) {
@@ -48,7 +48,8 @@ export class CategoryListComponent implements OnInit {
       .subscribe(data => {
         this.service.setAllCategories(data);
         this.categories_full = data;
-        this.onExpand();
+        this.categories = [...this.categories_full].slice(0, 20);
+
         this.successMessage = `(${this.categories.length} items)`;
       }, error => {
         this.errorMessage = error;
@@ -57,13 +58,9 @@ export class CategoryListComponent implements OnInit {
       
   }
 
-  urlFriendly(str) {
-    var url = str.substr(0, 200);
-    return this.service.removeAccents(url).replace(/[^a-zA-Z0-9]/g, '-').replace(/--+/g, '-');
-  }
-
   onExpand() {
     this.isExpand = !this.isExpand;
+
     //[...values].sort((a, b) => b - a).slice(0, 5);
     if (this.isExpand) {
 
