@@ -8,8 +8,8 @@
         </span>
     </div>
 
-    <div>      
-      <span class="small-label">
+    <div class="pt-1">      
+      <span class="badge-pill small-label">
         Mở / đóng - danh mục
       </span>      
     </div>
@@ -33,20 +33,18 @@
         </div>-->
 
         <div class="m-2">
-          <h1>
+          <h4>
             {{currentCategory.name}}
-          </h1>
+          </h4>
         </div>
       </div>
     </a>
   </div>
   <div class="m-2">
     <a routerLink='/' (click)="onCategoryReset()">
-      <h1>
         <span class="material-icons text-danger">
           highlight_off
         </span>
-      </h1>
     </a>
   </div>
 </div>
