@@ -86,7 +86,7 @@ namespace AngularDotnetCore.Migrations
                     { 4, 1, "Cần & Cho Thuê Các Thứ Khác" },
                     { 5, 2, "Nail & Beauty Spa Supply" },
                     { 6, 2, "Mua Bán Xe / Car" },
-                    { 7, 2, "Mua Bán Sĩ, Xuất Nhập Khẩu" },
+                    { 7, 2, "Mua Bán Sỉ, Xuất Nhập Khẩu" },
                     { 8, 2, "Mua Bán Các Loại" },
                     { 9, 3, "Cần Thợ Nails & Tóc" },
                     { 21, 4, "Mua Bán Nhà / Real Estate" },

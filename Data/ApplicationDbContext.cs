@@ -77,7 +77,7 @@ namespace AngularDotnetCore.Data
 
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 2, Id = 5, Icon = "soap", Name = "Nail & Beauty Spa Supply" });
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 2, Id = 6, Icon = "drive_eta", Name = "Mua Bán Xe (Cars for Sale)", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/xe-ban-auto-for-sale-browse-91.aspx" });
-            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 2, Id = 7, Icon = "directions_boat", Name = "Mua Bán Sĩ, Xuất Nhập Khẩu (Wholesale, Import, Export)" });
+            builder.Entity<Category>().HasData(new Category { CategoryGroupId = 2, Id = 7, Icon = "directions_boat", Name = "Mua Bán Sỉ, Xuất Nhập Khẩu (Wholesale, Import, Export)" });
             builder.Entity<Category>().HasData(new Category { CategoryGroupId = 2, Id = 8, Icon = "shopping_cart", Name = "Mua Bán Các Loại (Items for Sale)", ExternalUrl= "https://mraovat.nguoi-viet.com/classified/ban-cac-loai-items-for-sale-browse-118.aspx" });
 
 

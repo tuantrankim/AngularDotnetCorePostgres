@@ -46,7 +46,7 @@ namespace AngularDotnetCore.Migrations
                 keyColumn: "Id",
                 keyValue: 7,
                 column: "Name",
-                value: "Mua Bán Sĩ, Xuất Nhập Khẩu (Wholesale, Import, Export)");
+                value: "Mua Bán Sỉ, Xuất Nhập Khẩu (Wholesale, Import, Export)");
 
             migrationBuilder.UpdateData(
                 table: "Categories",
@@ -343,7 +343,7 @@ namespace AngularDotnetCore.Migrations
                 keyColumn: "Id",
                 keyValue: 7,
                 column: "Name",
-                value: "Mua Bán Sĩ, Xuất Nhập Khẩu");
+                value: "Mua Bán Sỉ, Xuất Nhập Khẩu");
 
             migrationBuilder.UpdateData(
                 table: "Categories",
