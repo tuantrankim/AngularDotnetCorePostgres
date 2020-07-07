@@ -6,10 +6,9 @@
         </span>
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item text-dark" [routerLink]='["/authentication/profile"]' title="Manage">Hello {{ userName | async }}</a>
-        <a class="dropdown-item">Edit Profile</a>
+        <a class="dropdown-item text-dark" [routerLink]='["/authentication/profile"]' title="Manage">{{ userName | async }}</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item text-dark" [routerLink]='["/authentication/logout"]' [state]='{ local: true }' title="Logout">Logout</a>
+        <a class="dropdown-item text-dark" [routerLink]='["/authentication/logout"]' [state]='{ local: true }' title="Logout">Thoát</a>
       </div>
     </li>
 
@@ -17,15 +16,15 @@
 
 <ul class="navbar-nav" *ngIf="!(isAuthenticated | async)">
   <li class="nav-item">
-    <a class="nav-link text-dark" [routerLink]='["/authentication/login"]'>
+    <a class="nav-link text-dark" [routerLink]='["/authentication/login"]' title="Login">
       <span>
-        <i class="material-icons align-top">account_circle</i>
+        <i class="material-icons align-top" >account_circle</i>
         Đăng nhập
       </span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link text-dark" [routerLink]='["/authentication/register"]'>
+    <a class="nav-link text-dark" [routerLink]='["/authentication/register"]' title="Register">
       <i class="material-icons align-top">perm_identity</i>
     Đăng ký</a>
   </li>

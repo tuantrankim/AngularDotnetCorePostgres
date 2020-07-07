@@ -61,6 +61,19 @@ export class AuthorizeService {
         map(user => user && user.access_token));
   }
 
+  // Simple login without silently loging in. Better peformance.
+  public async signIn(state: any): Promise<IAuthenticationResult> {
+    await this.ensureUserManagerInitialized();
+    let user: User = null;
+    try {
+      await this.userManager.signinRedirect(this.createArguments(state));
+      return this.redirect();
+    } catch (redirectError) {
+      console.log('Redirect authentication error: ', redirectError);
+      return this.error(redirectError);
+    }
+  }
+
   // We try to authenticate the user in three different ways:
   // 1) We try to see if we can authenticate the user silently. This happens
   //    when the user is already logged in on the IdP and is done using a hidden iframe
@@ -69,9 +82,10 @@ export class AuthorizeService {
   //    Pop-Up blocker or the user has disabled PopUps.
   // 3) If the two methods above fail, we redirect the browser to the IdP to perform a traditional
   //    redirect flow.
-  public async signIn(state: any): Promise<IAuthenticationResult> {
+  public async signIn2(state: any): Promise<IAuthenticationResult> {
     await this.ensureUserManagerInitialized();
     let user: User = null;
+    
     try {
       user = await this.userManager.signinSilent(this.createArguments());
       this.userSubject.next(user.profile);

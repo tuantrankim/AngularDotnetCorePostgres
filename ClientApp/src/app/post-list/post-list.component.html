@@ -1,7 +1,7 @@
 <app-search (criteriaChange) ="searchCriteriaChange($event)"></app-search>
 
 <div class="m-2">
-  <div class="d-flex" (click)="onToggleCategory()">
+  <div class="d-flex" (click)="onToggleCategory()" title="Show / hide categories">
     <div>
         <span class="material-icons text-success category-icon">
           apps
@@ -95,8 +95,8 @@
 
 </div>
 
-<div class="text-center">
-  <button class="btn btn-outline-success" (click)="loadMore()"><<< Xem thêm >>></button>
+<div class="text-center mt-4">
+  <button class="btn btn-outline-success" (click)="loadMore()" title="View more"><<< Xem thêm >>></button>
 </div>
 <p class="float-right small">{{successMessage}}</p>
 <!--{{errorMessage}}-->

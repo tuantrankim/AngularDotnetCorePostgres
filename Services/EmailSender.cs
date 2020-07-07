@@ -25,7 +25,7 @@ namespace AngularDotnetCore.Services
             _smtpPort = int.Parse(configuration["Email:SmtpPort"]);
             _smtpPort = _smtpPort == 0 ? 25 : _smtpPort;
             _fromAddress = configuration["Email:FromAddress"];
-            _fromAddressTitle = configuration["FromAddressTitle"];
+            _fromAddressTitle = configuration["Email:FromAddressTitle"];
             _username = configuration["Email:SmtpUsername"];
             _password = configuration["Email:SmtpPassword"];
             _enableSsl = bool.Parse(configuration["Email:EnableSsl"]);

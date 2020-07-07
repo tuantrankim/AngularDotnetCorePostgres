@@ -52,14 +52,18 @@ namespace AngularDotnetCore.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            //[StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "{0} ít nhât {2} và nhiều nhất {1} ký tự.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            //[Display(Name = "Password")]
+            [Display(Name = "Mật khẩu")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            //[Display(Name = "Confirm password")]
+            [Display(Name = "Nhập lại mật khẩu")]
+            //[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "Mật khẩu nhập lại không khớp.")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -89,8 +93,17 @@ namespace AngularDotnetCore.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    string img = "<img alt='Rao Vặt Việt Mỹ' class='logo' src='https://raovatvietmy.com/assets/images/raovatvietmy.png'>";
+                    string msg = img +
+                        $"<h4>Cám ơn bạn đã đăng ký tài khoản tại website https://raovatvietmy.com </h4> " +
+                        $"<p>Để hoàn tất quá trình đăng ký, xin bạn vui lòng xác nhận địa chỉ Email bằng cách " +
+                        $"<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>nhấp chuột vào đây</a>.</p> " +
+                        $"<p>Trân trọng kính chào.</p>" +
+                        $"<p>https://raovatvietmy.com</p>";
+
+                    await _emailSender.SendEmailAsync(Input.Email, "Xác thực email của bạn",msg);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

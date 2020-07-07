@@ -15,7 +15,7 @@ using AngularDotnetCore.Models;
 namespace AngularDotnetCore.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public abstract class ResendEmailConfirmationModel : PageModel
+    public class ResendEmailConfirmationModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
@@ -50,7 +50,8 @@ namespace AngularDotnetCore.Areas.Identity.Pages.Account
             var user = await _userManager.FindByEmailAsync(Input.Email);
             if (user == null)
             {
-                ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
+                //ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
+                ModelState.AddModelError(string.Empty, "Đã gửi email xác minh. Xin vui lòng kiểm tra email của bạn");
                 return Page();
             }
 
@@ -62,12 +63,19 @@ namespace AngularDotnetCore.Areas.Identity.Pages.Account
                 pageHandler: null,
                 values: new { userId = userId, code = code },
                 protocol: Request.Scheme);
+            string img = "<img alt='Rao Vặt Việt Mỹ' class='logo' src='https://raovatvietmy.com/assets/images/raovatvietmy.png'>";
+            string msg = img +
+                $"<h4>Cám ơn bạn đã đăng ký tài khoản tại website https://raovatvietmy.com </h4> " +
+                $"<p>Để hoàn tất quá trình đăng ký, xin bạn vui lòng xác nhận địa chỉ Email bằng cách " +
+                $"<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>nhấp chuột vào đây</a>.</p> " +
+                $"<p>Trân trọng kính chào.</p>" +
+                $"<p>https://raovatvietmy.com</p>";
+
             await _emailSender.SendEmailAsync(
                 Input.Email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                "Xác thực email của bạn", msg);
 
-            ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
+            ModelState.AddModelError(string.Empty, "Đã gửi email xác minh. Xin vui lòng kiểm tra email của bạn");
             return Page();
         }
     }
