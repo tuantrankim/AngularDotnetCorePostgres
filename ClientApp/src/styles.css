@@ -116,28 +116,27 @@ span.field-validation-error {
 
 /* Bootstrap Overrides */
 
-/*.form-group {
+.form-group {
   margin-bottom: 20px;
 }
 .form-control {
-  font-size: 17px;*/
+  /*font-size: 17px;
+  padding: 20px 15px;*/
 
-/*padding: 20px 15px;*/
-
-/*border-radius: 9px;
+  border-radius: 9px;
   -ms-border-radius: 9px;
-}*/
+}
 
 .form-control:focus {
   border-color: #2196f3;
   box-shadow: none;
 }
 
-/*.btn {
+.btn {
   border-radius: 9px;
   -ms-border-radius: 9px;
 }
-*/
+
 
 .category {
   background-color: white;
