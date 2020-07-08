@@ -1,6 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+.fb {
+  background-color: #3B5998;
+  color: white;
+  width: 250px;
+  padding: 10px;
+  margin: 10px;
+}
 
-/* Provide sufficient contrast against white background */
+.twitter {
+  background-color: #55ACEE;
+  color: white;
+  width: 250px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.google {
+  background-color: #dd4b39;
+  color: white;
+  width: 250px;
+  padding: 10px;
+  margin: 10px;
+}
+
 a {
   color: #0366d6;
 }
@@ -16,7 +37,7 @@ code {
 }
 
 .badge-pill {
-  padding:0.2em 0.8em;
+  padding: 0.2em 0.8em;
   border-radius: 10rem;
   background-color: white;
   /*color: #1b6ec2;*/
@@ -24,16 +45,11 @@ code {
   cursor: pointer;
 }
 
-/*.btn-primary {
-  color: #fff;
-  background-color: #20534c;
-  border-color: #1861ac;
-}*/
-
 body {
   font-family: Helvetica, Arial, sans-serif;
   /*  font-size: 16px;*/
 }
+
 #loader {
   position: absolute;
   left: 50%;
@@ -70,13 +86,14 @@ body {
     transform: rotate(360deg);
   }
 }
+
 h1 .material-icons {
-font-size:24px;
+  font-size: 24px;
 }
 
 .btn-create-post {
-  min-width: 150px;
-  font-size: 17px;
+  /*  min-width: 150px;*/
+  /*  font-size: 14px;*/
 }
 
 .logo {
@@ -84,44 +101,48 @@ font-size:24px;
 }
 
 .page-title {
-    padding: 20px 0px;
+  padding: 20px 0px;
 }
-.page-footer{
-    padding: 20px 0px;
-    margin: 40px 0px;
-}
- 
 
-  span.field-validation-error {
-    color: red;
-    font-weight: bold;
-  }
+.page-footer {
+  padding: 20px 0px;
+  margin: 40px 0px;
+}
+
+span.field-validation-error {
+  color: red;
+  font-weight: bold;
+}
+
 /* Bootstrap Overrides */
-.form-group {
+
+/*.form-group {
   margin-bottom: 20px;
 }
 .form-control {
-  font-size: 17px;
-  /*padding: 20px 15px;*/
-  border-radius: 9px;
+  font-size: 17px;*/
+
+/*padding: 20px 15px;*/
+
+/*border-radius: 9px;
   -ms-border-radius: 9px;
-}
+}*/
 
 .form-control:focus {
   border-color: #2196f3;
-  -webkit-box-shadow: none;
   box-shadow: none;
 }
 
-.btn {
+/*.btn {
   border-radius: 9px;
   -ms-border-radius: 9px;
 }
+*/
 
 .category {
   background-color: white;
-  font-size:14px;
-  width: 200px;
+  font-size: 14px;
+  width: 215px;
   margin: 0.2em 0.2em;
   padding: 0px;
   border: none;
@@ -131,12 +152,12 @@ font-size:24px;
 
 .category-icon {
   font-size: 30px;
-  padding-right:0.1em;
-  margin:0em;
+  padding-right: 0.1em;
+  margin: 0em;
 }
 
 .card {
-  background-color:white;
+  background-color: white;
   border-radius: 6px;
   -ms-border-radius: 6px;
   width: 350px;
@@ -148,17 +169,18 @@ font-size:24px;
 }
 
 .card-body {
-    padding: 0.7em 0.7em;
+  padding: 0.7em 0.7em;
 }
 
 .card-footer {
-  background-color:inherit;
+  background-color: inherit;
   padding: 0;
   margin: 0em 0.7em;
   border: none;
   height: 2.5em;
   font-size: 14px;
 }
+
 .card-icon {
   font-size: 20px;
 }
@@ -185,25 +207,24 @@ input[type=search] {
   padding: 0px;
 }
 
-.nav-search label, .small-label {
-  color: #0069d9;
-  font-size: small;
-  font-weight: bold;
-  margin: 0px 10px;
-}
+  .nav-search label, .small-label {
+    color: #0069d9;
+    font-size: small;
+    font-weight: bold;
+    margin: 0px 10px;
+  }
 
-.nav-search .form-group {
-    margin-top:0px;
-    margin-bottom:0px;
-}
+  .nav-search .form-group {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
 
-.offset-navbar{
-    margin-top:70px;
+.offset-navbar {
+  margin-top: 70px;
 }
-
 
 @media (max-width: 768px) {
-/*  h1 {
+  /*  h1 {
       font-size:24px;
   }
     h1 .material-icons {
@@ -226,7 +247,10 @@ input[type=search] {
 
   .category {
     width: calc((50%) - (0.4em));
-/*    width:50%;*/
+    /*    width:50%;*/
     margin: 0.2em 0.2em;
   }
 }
+
+
+/*# sourceMappingURL=styles.css.map*/

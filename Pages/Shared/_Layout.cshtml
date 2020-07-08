@@ -21,7 +21,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/Identity/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/Identity/css/site.css" />
+    @*<link rel="stylesheet" href="~/Identity/css/site.css" />*@
+    <link rel="stylesheet" href="~/styles.css" />
 </head>
 <body>
     <header>
@@ -32,8 +33,8 @@
                     <img class="logo" src="~/images/raovatvietmy.png" alt="Rao Vặt Việt Mỹ" />
                 </a>
                 
-                <div class="nav-item ml-3">
-                    <a class="btn btn-primary btn-create-post" href='~/create-post' title="Post new ad">
+                <div class="d-inline-flex flex-grow-1 flex-row-reverse pr-2">
+                    <a class="btn btn-primary btn-create-post" href="/create-post" title="Post new ad">
                         <span><i class="material-icons align-middle pr-2 ">comment</i>Đăng tin</span>
                     </a>
                 </div>
@@ -43,7 +44,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse flex-grow-0">
                     @{
                         var result = Engine.FindView(ViewContext, "_LoginPartial", isMainPage: false);
                     }
