@@ -7,8 +7,6 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-//import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
@@ -28,8 +26,6 @@ import { PostDetailComponent } from './post-detail/post-detail.component';
     NavMenuComponent,
     HomeComponent,
     PostListComponent,
-    //CounterComponent,
-    //FetchDataComponent,
     CreatePostComponent,
     SearchCityComponent,
     SearchCategoryComponent,
@@ -46,11 +42,9 @@ import { PostDetailComponent } from './post-detail/post-detail.component';
     NgbTypeaheadModule,
     NgbTooltipModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full', data: { kind: 'search' } },
+      { path: '', component: PostListComponent, pathMatch: 'full', data: { kind: 'search' } },
       { path: 'category/:categoryId/:categoryDescription', component: PostListComponent, data: { kind: 'category' } },
       { path: 'post/:postId/:postTitle', component: PostListComponent, data: { kind: 'post' } },
-      //{ path: 'counter', component: CounterComponent },
-      //{ path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
       { path: 'create-post', component: CreatePostComponent, canActivate: [AuthorizeGuard] },
     ])
   ],

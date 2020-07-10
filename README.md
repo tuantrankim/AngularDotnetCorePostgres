@@ -241,3 +241,25 @@ sudo systemctl restart apache2
 # Google webmaster tool
 
 https://search.google.com/search-console?resource_id=sc-domain%3Araovatvietmy.com&hl=en
+
+
+
+
+#Tool
+Resize image upload
+https://www.npmjs.com/package/ng2-imageupload
+
+upload image
+https://primefaces.org/primeng/showcase/#/fileupload
+
+primeng editor
+https://primefaces.org/primeng/showcase/#/editor
+
+ngx-quill editor
+https://developer.aliyun.com/mirror/npm/package/ngx-quill-example
+
+Quill ImageResize Module
+https://www.npmjs.com/package/quill-image-resize-module
+
+compare trend
+https://www.npmtrends.com/@angular/material-vs-primeng-vs-@ng-bootstrap/ng-bootstrap-vs-@ngx-translate/core

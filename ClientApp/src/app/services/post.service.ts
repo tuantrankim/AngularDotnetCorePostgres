@@ -109,6 +109,7 @@ export class PostService {
   }
 
   public urlFriendly(str) {
+    if (!str) return '';
     var url = str.substr(0, 200);
     return this.removeAccents(url).replace(/[^a-zA-Z0-9]/g, '-').replace(/--+/g, '-');
   }

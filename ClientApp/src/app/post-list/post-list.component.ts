@@ -24,8 +24,8 @@ export class PostListComponent implements OnInit, OnDestroy{
   private subscription: Subscription;
   currentCategory: Category;
   currentPost: Post;
-  private showCategory = true;
-  private showPost = false;
+  public showCategory = true;
+  public showPost = false;
 
   private criteria: PostSearchCriteria = {
     fromPostId: null,
@@ -80,8 +80,14 @@ export class PostListComponent implements OnInit, OnDestroy{
     }
     else if (kind == "search"){
       this.subscription = this.service.notifyObservable$.subscribe((criteria: PostSearchCriteria) => {
+        if (criteria) this.criteria = { ...criteria };
+        else this.criteria = {
+          fromPostId: null,
+          titleContain: null,
+          cityId: null,
+          categoryId: null
+        };
 
-      this.criteria = { ...criteria };
       this.currentCategory = this.service.searchCategory;
       if (this.currentCategory) {
         const title = this.currentCategory.name + ' | Rao Vặt Việt Mỹ - đăng tin miễn phí - Classified Ads';
@@ -89,8 +95,9 @@ export class PostListComponent implements OnInit, OnDestroy{
         this.metaService.updateTag({ name: 'keywords', content: title });
         this.metaService.updateTag({ name: 'description', content: title });
         }
-        if (!criteria) this.getPosts();
-        else this.searchPosts(criteria);
+        //if (!criteria) this.getPosts();
+        //else
+          this.searchPosts(this.criteria);
     });
     }
 
@@ -137,7 +144,6 @@ export class PostListComponent implements OnInit, OnDestroy{
     this.service.getLatestPosts()
       .subscribe(data => {
         this.posts = data;
-        this.searchPosts(this.criteria);
         this.successMessage = `(${this.posts.length} items)`;
       }, error => {
           this.errorMessage = error;
