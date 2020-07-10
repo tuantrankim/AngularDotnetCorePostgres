@@ -33,7 +33,7 @@ export class PostListComponent implements OnInit, OnDestroy{
     categoryId: null
   };
 
-  constructor(private titleService: Title, private metaService: Meta, private service: PostService, private route: ActivatedRoute) {
+  constructor(private titleService: Title, private metaService: Meta, public service: PostService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
