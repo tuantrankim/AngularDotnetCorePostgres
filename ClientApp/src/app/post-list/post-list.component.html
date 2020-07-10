@@ -16,7 +16,7 @@
   </div>
 </div>
 
-<app-category-list *ngIf="showCategory"></app-category-list>
+<app-category-list *ngIf="service.showCategory"></app-category-list>
 
 <app-post-detail *ngIf="showPost&&currentPost" [post]="currentPost"></app-post-detail>
 

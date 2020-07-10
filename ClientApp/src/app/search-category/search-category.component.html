@@ -21,7 +21,7 @@
            #term [ngbTooltip]="tooltipContent(term.value)"
            tooltipClass="btn btn-alert"
            triggers="manual" #t1="ngbTooltip"
-           (search)="onSearch(t1)" />
+           (search)="onSearch(t1);term.blur()" />
 
     <!--<span class="input-group-append">
     <button class="input-group-text bg-transparent" (click)="searchBtnClick(t1)" type="submit">

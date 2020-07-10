@@ -25,7 +25,7 @@ export class PostService {
   private _searchTitleContain: string;
   private _searchCityId: number;
   private _searchCategoryId: number;
-
+  public showCategory: boolean = true;
   private _cities: City[];
   private _categories: Category[];
 

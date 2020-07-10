@@ -22,6 +22,7 @@ export class SearchComponent implements OnInit {
 
   searchPosts() {
     console.log("on search content");
+    this.service.showCategory = false;
     //this.service.searchTitleContain = this.searchContent;
     this.criteriaChange.emit({ ...this.criteria, titleContain: this.searchContent });
   }

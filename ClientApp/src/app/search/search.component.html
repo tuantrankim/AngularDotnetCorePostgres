@@ -13,11 +13,11 @@
           <div class="form-group">
             <label for="titleContain">Tìm nội dung</label>
             <div class="input-group">
-              <input id="titleContain" type="search" name="titleContain"
+              <input id="titleContain" type="search" name="titleContain" #titleContain
                      [(ngModel)]="searchContent"
                      placeholder="Nhập nội dung cần tìm ..."
                      class="form-control"
-                     (search)="searchPosts()">
+                     (search)="searchPosts();titleContain.blur()">
 
               <span class="input-group-append">
                 <button class="input-group-text btn" type="button" (click)="onExpand()">

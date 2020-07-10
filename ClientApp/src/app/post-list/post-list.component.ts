@@ -24,7 +24,6 @@ export class PostListComponent implements OnInit, OnDestroy{
   private subscription: Subscription;
   currentCategory: Category;
   currentPost: Post;
-  public showCategory = true;
   public showPost = false;
 
   private criteria: PostSearchCriteria = {
@@ -34,7 +33,8 @@ export class PostListComponent implements OnInit, OnDestroy{
     categoryId: null
   };
 
-  constructor(private titleService: Title, private metaService: Meta,private service: PostService, private route: ActivatedRoute) { }
+  constructor(private titleService: Title, private metaService: Meta, private service: PostService, private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
     //this.subscription = this.service.notifyObservable$.subscribe((criteria: PostSearchCriteria) => {
@@ -52,6 +52,7 @@ export class PostListComponent implements OnInit, OnDestroy{
     //  if (!criteria) this.getPosts();
     //  else this.searchPosts(criteria);
     //});
+
     let kind = "search";
 
     this.route.data.subscribe(data => {
@@ -64,7 +65,7 @@ export class PostListComponent implements OnInit, OnDestroy{
         let categoryDescription = params.get('categoryDescription');
 
         if (this.categoryId) {
-          this.showCategory = false;
+          this.service.showCategory = false;
           this.criteria.categoryId = this.categoryId;
           this.currentCategory = new Category();
           this.currentCategory.name = categoryDescription;
@@ -107,7 +108,7 @@ export class PostListComponent implements OnInit, OnDestroy{
         let postTitle = params.get('postTitle');
 
         if (this.postId) {
-          this.showCategory = false;
+          this.service.showCategory = false;
           this.showPost = true;
           
           //this.criteria.categoryId = this.categoryId;
@@ -207,6 +208,6 @@ export class PostListComponent implements OnInit, OnDestroy{
   }
 
   onToggleCategory() {
-    this.showCategory = !this.showCategory;
+    this.service.showCategory = !this.service.showCategory;
   }
 }
